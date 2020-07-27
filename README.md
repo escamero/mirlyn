@@ -40,4 +40,3 @@ mirlyn is available via github:
 devtools:install_github("escamero/mirlyn")
 ```
 
-This is a test sentence.
