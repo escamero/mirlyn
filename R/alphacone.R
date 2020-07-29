@@ -46,6 +46,12 @@ functionB2 <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975)) {
   y2
 }
 
+#' Alpha Diversity Index Distributions
+#'
+#' alphacone() will generate a distribution plot of the alpha diversity index for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity index and the perceived variation in the index values. Generations of the distribution of the alpha diversity index allows for a comprehensive examination of the alpha diversity index values to account for variation introduced into the diversity index as an artifact of rarefied libraray size.
+#'
+#'
+
 #' @export
 alphacone <- function(obj, libs = c(15000, 16000, 17000, 18000, 19000), rep = 1000, set.seed = NULL, diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
   the_reps <- functionRep(obj, libs = libs, rep = rep, set.seed = set.seed)

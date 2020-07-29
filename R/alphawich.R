@@ -1,18 +1,35 @@
+#' Alpha Diversity Dataframe
+#'
+#' alphadivDF() will generate a dataframe of alpha-diversity values from the mirl object allowing for characterization of uncertainty and variation introduced through random subsampling during rarefying.
+#'
+#' @param x The mirl object.
+#' @param diversity Diversity index to be applied. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.
+#'
+#' @return A dataframe consisting of sample metadata and selected diversity indexes.
+#'
+#' @examples
+#' #library(mirlyn)
+#' #data(exampledata)
+#'
+#' #mirlexample <- mirl(exampledata)
+#' #alphadiv_df <- alphadivDF(mirlexample)
+
 #' @export
-alphawichDF <- function(x, diversity="shannon"){
+alphadivDF <- function(x, diversity="shannon"){
   md <- sam_data(x[[1]])
   div <- vegan::diversity(t(functionA(x)), index=diversity)
   final <- cbind(md, DiversityIndex = div)
   final
 }
 
-#' This is the alphawhichvis function.
+#' Visualization of Alpha Diversity Indexes
 #'
-#' The description.
+#' alphawichVis() will visualize the diversity index values generated from alphadivDF().
 #'
 #' @param alphawichDF The alphawichDF object.
-#' @param yvar The yvar column name.
-#' @param xvar The xvar column name.
+#' @param yvar The yvar column name. By default, the diversity index value will be plotted.
+#' @param xvar The xvar column name. Users must specify the metadata column to be plotted on the x-axis.
+#' @param colorvar The metadat column name that will be used for colour assignment.
 #'
 #' @return A ggplot object.
 #'
