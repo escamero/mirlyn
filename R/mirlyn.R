@@ -7,5 +7,8 @@
 #' @name mirlyn-pkg
 #'
 #' @import phyloseq
-#' @importFrom ggplot2 ggplot aes_string geom_jitter
+#' @import ggplot2
+#' @importFrom factoextra fviz_pca_ind
+#' @importFrom stats prcomp quantile
+#' @importFrom vegan vegdist decostand
 NULL

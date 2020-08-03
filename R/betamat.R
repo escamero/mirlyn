@@ -2,16 +2,16 @@
 #'
 #'  betamatPCA() will perform a PCA on the mirl() object.
 #'
-#'  @param x The mirl() object.
-#'  @param transformation Supported standardization methods in community ecology in decostand() from library(vegan). Hellinger transformations must be applied to ecological data in order to allow for application in Euclidean space.
-#'  @param dsim The dissimilarity metric supported by vegdist() from library(vegan). By default, the Bray-Curtis dissimilarity matrix will be applied.
+#' @param x The mirl() object.
+#' @param transformation Supported standardization methods in community ecology in decostand() from library(vegan). Hellinger transformations must be applied to ecological data in order to allow for application in Euclidean space.
+#' @param dsim The dissimilarity metric supported by vegdist() from library(vegan). By default, the Bray-Curtis dissimilarity matrix will be applied.
 #'
-#'  @return A prcomp object
+#' @return A prcomp object
 #'
-#'  @examples
+#' @examples
 #'  library(mirlyn)
-#'  data(exampledata)
-#'  mirlexample <- mirl(exampledata)
+#'  data(example)
+#'  mirlexample <- mirl(example, rep = 10)
 #'
 #'  betamatPCA_object <- betamatPCA(mirlexample, dsim = "jaccard")
 #'
@@ -19,10 +19,10 @@
 #' @export
 betamatPCA <- function(x, transformation="hellinger", dsim="bray"){
   if (is.null(transformation)){
-    dist <- vegdist(as.matrix(t(functionA(x))))
+    dist <- vegdist(as.matrix(t(repotu_df(x))))
   } else {
-    transform <- decostand(as.matrix(t(functionA(x))), transformation)
-    dist <- vegdist(transform, method=distance)
+    transform <- decostand(as.matrix(t(repotu_df(x))), transformation)
+    dist <- vegdist(transform, method=dsim)
   }
   pca <- prcomp(dist)
   pca
@@ -42,11 +42,11 @@ betamatPCA <- function(x, transformation="hellinger", dsim="bray"){
 #'
 #' @examples
 #' library(mirlyn)
-#' data(exampledata)
-#' mirlexample <- mirl(exampledata)
+#' data(example)
+#' mirlexample <- mirl(example, rep = 10)
 #' betamatPCA_object <- betamatPCA(mirlexample)
 #'
-#' betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 1000, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
+#' betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 10, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
 #'
 #' @export
 betamatPCAvis <- function(x, geom="point", groups, reps, colours){

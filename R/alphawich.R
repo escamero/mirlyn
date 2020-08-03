@@ -8,16 +8,15 @@
 #' @return A dataframe consisting of sample metadata and selected diversity indexes.
 #'
 #' @examples
-#' #library(mirlyn)
-#' #data(exampledata)
+#' library(mirlyn)
+#' data(example)
 #'
-#' #mirlexample <- mirl(exampledata)
-#' #alphadiv_df <- alphadivDF(mirlexample)
-
+#' mirlexample <- mirl(example, rep = 10)
+#' alphadiv_df <- alphadivDF(mirlexample)
 #' @export
 alphadivDF <- function(x, diversity="shannon"){
-  md <- sam_data(x[[1]])
-  div <- vegan::diversity(t(functionA(x)), index=diversity)
+  md <- sample_data(x[[1]])
+  div <- vegan::diversity(t(repotu_df(x)), index=diversity)
   final <- cbind(md, DiversityIndex = div)
   final
 }
@@ -35,13 +34,20 @@ alphadivDF <- function(x, diversity="shannon"){
 #'
 #' @examples
 #' # This is one way of using it.
-#' #library(mirlyn)
-#' #data(exampleobject)
+#' library(mirlyn)
+#' data(example)
 #'
-#' #alphawichvis(exampleobject)
+#' example <- mirl(example, rep = 10)
+#' example <- alphadivDF(example)
+#' alphawichVis(example, "time")
 #'
 #' @export
-alphawichVis <- function(alphawichDF, yvar="DiversityIndex", xvar, colorvar="Group") {
-  ggplot(alphawichDF, aes_string(x = xvar, y = yvar, color=colorvar))+theme_bw()+geom_jitter()+scale_y_continuous(limits=c(0, max(alphawichDF$DiversityIndex)*1.01))
+alphawichVis <- function(alphawichDF, xvar, yvar="DiversityIndex", colorvar=NULL) {
+  if (is.null(colorvar)) {
+    alpha <- ggplot(alphawichDF, aes_string(x = xvar, y = yvar))
+  } else {
+    alpha <- ggplot(alphawichDF, aes_string(x = xvar, y = yvar, color = colorvar))
+  }
+  alpha + theme_bw()+geom_jitter()+scale_y_continuous(limits=c(0, max(alphawichDF$DiversityIndex)*1.01))
 }
 

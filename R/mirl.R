@@ -16,10 +16,12 @@ sample_sums <- phyloseq::sample_sums
 #'
 #' @examples
 #' library(mirlyn)
-#' mirl_object <- mirl(x, libsize = 10000, rep = 1000, set.seed=120)
+#' data(example)
+#'
+#' mirl_object <- mirl(example, libsize = 10000, rep = 10, set.seed=120)
 #'
 #' @export
 mirl <- function(x, libsize=min(sample_sums(x)), rep=1000, set.seed=NULL, trimOTUs=FALSE, replace=FALSE){
   if (!is.null(set.seed)) set.seed(set.seed)
-  replicate(rep, phyloseq::rarefy_even_depth(x, samplesize=libsize, trimOTUs = trimOTUs, replace = replace))
+  replicate(rep, rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs, replace = replace, verbose = FALSE))
 }

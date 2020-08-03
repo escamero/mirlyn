@@ -18,4 +18,4 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
-Imports: phyloseq, ggplot2, vegan, stats, factoextra, methods
+Imports: phyloseq, ggplot2, vegan, stats, factoextra, methods, readr, microbiome, Biostrings

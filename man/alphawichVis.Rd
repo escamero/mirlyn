@@ -2,28 +2,32 @@
 % Please edit documentation in R/alphawich.R
 \name{alphawichVis}
 \alias{alphawichVis}
-\title{This is the alphawhichvis function.}
+\title{Visualization of Alpha Diversity Indexes}
 \usage{
-alphawichVis(alphawichDF, yvar = "DiversityIndex", xvar, colorvar = "Group")
+alphawichVis(alphawichDF, xvar, yvar = "DiversityIndex", colorvar = NULL)
 }
 \arguments{
 \item{alphawichDF}{The alphawichDF object.}
 
-\item{yvar}{The yvar column name.}
+\item{xvar}{The xvar column name. Users must specify the metadata column to be plotted on the x-axis.}
 
-\item{xvar}{The xvar column name.}
+\item{yvar}{The yvar column name. By default, the diversity index value will be plotted.}
+
+\item{colorvar}{The metadat column name that will be used for colour assignment.}
 }
 \value{
 A ggplot object.
 }
 \description{
-The description.
+alphawichVis() will visualize the diversity index values generated from alphadivDF().
 }
 \examples{
 # This is one way of using it.
-#library(mirlyn)
-#data(exampleobject)
+library(mirlyn)
+data(example)
 
-#alphawichvis(exampleobject)
+example <- mirl(example, rep = 10)
+example <- alphadivDF(example)
+alphawichVis(example, "time")
 
 }
