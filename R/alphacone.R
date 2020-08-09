@@ -17,6 +17,14 @@ rarefy_rep_otu <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 
   #out
 #}
 
+rarefy_lib_otu <- function(x, libsizes) {
+  lapply(libsizes, function(y) otu_table(rarefy_even_depth(x, y, verbose = FALSE)))
+}
+
+rarefy_lib_otu_rep <- function(x, libsizes, rep) {
+  lapply(seq_len(rep), function(y) rarefy_lib_otu(x, libsizes))
+}
+
 #Replicate OTU Table to Dataframe - Single Library Size
 repotu_df <- function(x) {
   newdat <- lapply(x, otu_table)
@@ -46,7 +54,7 @@ div_quantile <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975)) 
   quantile(x2, quantiles)
 }
 div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975)) {
-  y <- lapply(x, function(z) repotu_libsize_df(z, diversity, quantiles))
+  y <- lapply(x, function(z) div_quantile(z, diversity, quantiles))
   for (i in seq_along(y)) {
     y[[i]] <- data.frame(Lower = y[[i]][1], Upper = y[[i]][2])
   }
@@ -77,9 +85,60 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #'
 #' # Don't think this works on multiple samples right now.
 #' @export
-alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
-  the_reps <- rarefy_rep_otu(x, rep = rep, steps = steps)
+alphacone <- function(x, rep = 1000, steps = seq(from = 0.1, to = 1, by = 0.1), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
+  libsizes <- max(sample_sums(x)) * steps
+  tic()
+  the_reps <- rarefy_lib_otu_rep(x, libsizes = libsizes, rep = rep)
+  toc()
+  print("Step 1 complete")
+  return(the_reps)
+  tic()
   the_reps_fixed <- repotu_libsize_df(the_reps)
+  toc()
+  print("Step 2 complete")
+  tic()
   the_reps_q <- div_quantile_df(the_reps_fixed, diversity = diversity, quantiles = c(lower.q, upper.q))
+  toc()
   the_reps_q
 }
+
+alphaconeV2 <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
+  libsizes <- max(sample_sums(x)) * steps
+  samplenames <- sample_names(x)
+  bylibsize <- vector("list", length(libsizes))
+  for (i in seq_along(bylibsize)) {
+    bylibsize[[i]] <- lapply(seq_len(rep), function(y) rarefy_even_depth(x, libsizes[i], verbose = FALSE))
+  }
+  for (i in seq_along(bylibsize)) {
+    for (j in seq_along(bylibsize[[i]])) {
+      otutable <- t(otu_table(bylibsize[[i]][[j]]))
+      if (nrow(otutable) == 1) {
+        otutable <- as.data.frame(otutable)
+        tmpnames <- rownames(otutable)
+      }
+      bylibsize[[i]][[j]] <- vegan::diversity(otutable, index = diversity)
+      if (nrow(otutable) == 1) {
+        names(bylibsize[[i]][[j]]) <- tmpnames
+      }
+    }
+  }
+  for (i in seq_along(bylibsize)) {
+    for (j in seq_along(bylibsize[[i]])) {
+      bylibsize[[i]][[j]] <- data.frame(Sample = names(bylibsize[[i]][[j]]), LibSize = libsizes[i], Rep = j, DiversityIndex = bylibsize[[i]][[j]])
+    }
+    bylibsize[[i]] <- do.call(rbind, bylibsize[[i]])
+  }
+  bylibsize <- do.call(rbind, bylibsize)
+  rownames(bylibsize) <- NULL
+  bylibsize <- bylibsize %>% group_by(Sample, LibSize) %>%
+    summarise(LowerQ = quantile(DiversityIndex, lower.q), UpperQ = quantile(DiversityIndex, upper.q))
+  #bylibsize
+  as.data.frame(bylibsize)
+}
+
+
+
+
+
+
+

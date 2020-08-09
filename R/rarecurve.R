@@ -31,9 +31,12 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 #' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
 #'
 #' @export
-rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), set.seed = NULL){
+rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.05, to = 1, by = 0.05), set.seed = NULL, mc.cores = 1L){
   if (!is.null(set.seed)) set.seed(set.seed)
-  rarefy_rep <- lapply(seq_len(rep), function(y) rarefy_whole(x, steps = steps))
+  libsizes <- sample_sums(x)
+  libsizes <- max(libsize) * steps
+  samplenames <- colnames(otu_table(x))
+  rarefy_rep <- mclapply(seq_len(rep), function(y) rarefy_whole(x, steps = steps), mc.cores = mc.cores)
   all_Obs <- lapply(rarefy_rep, function(y) as.matrix(y[, 2, drop = FALSE]))
   all_Obs <- do.call(cbind, all_Obs)
   all_Obs <- rowMeans(all_Obs)

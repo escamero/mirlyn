@@ -7,8 +7,9 @@
 rarefy_whole_rep(
   x,
   rep = 100,
-  steps = seq(from = 0.001, to = 1, by = 0.01),
-  set.seed = NULL
+  steps = seq(from = 0.05, to = 1, by = 0.05),
+  set.seed = NULL,
+  mc.cores = 1L
 )
 }
 \arguments{
