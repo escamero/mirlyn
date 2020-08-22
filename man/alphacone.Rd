@@ -7,10 +7,11 @@
 alphacone(
   x,
   rep = 1000,
-  steps = seq(from = 0.1, to = 1, by = 0.1),
+  steps = seq(from = 0.001, to = 1, by = 0.01),
   diversity = "shannon",
   lower.q = 0.025,
-  upper.q = 0.975
+  upper.q = 0.975,
+  replace = FALSE
 )
 }
 \arguments{

@@ -4,7 +4,7 @@
 \alias{rarecurve}
 \title{Rarefaction Curve}
 \usage{
-rarecurve(x, sample = NULL)
+rarecurve(x, sample = "Sample")
 }
 \arguments{
 \item{x}{The rarefy_whole_rep() object.}

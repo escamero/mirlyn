@@ -64,6 +64,23 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
   y2
 }
 
+# alphacone <- function(x, rep = 1000, steps = seq(from = 0.1, to = 1, by = 0.1), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
+#   libsizes <- max(sample_sums(x)) * steps
+#   tic()
+#   the_reps <- rarefy_lib_otu_rep(x, libsizes = libsizes, rep = rep)
+#   toc()
+#   print("Step 1 complete")
+#   return(the_reps)
+#   tic()
+#   the_reps_fixed <- repotu_libsize_df(the_reps)
+#   toc()
+#   print("Step 2 complete")
+#   tic()
+#   the_reps_q <- div_quantile_df(the_reps_fixed, diversity = diversity, quantiles = c(lower.q, upper.q))
+#   toc()
+#   the_reps_q
+# }
+
 #' Alpha Diversity Index Distributions
 #'
 #' alphacone() will generate a distribution plot of the alpha diversity index for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity index and the perceived variation in the index values. Generations of the distribution of the alpha diversity index allows for a comprehensive examination of the alpha diversity index values to account for variation introduced into the diversity index as an artifact of rarefied library size.
@@ -85,29 +102,12 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #'
 #' # Don't think this works on multiple samples right now.
 #' @export
-alphacone <- function(x, rep = 1000, steps = seq(from = 0.1, to = 1, by = 0.1), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
-  libsizes <- max(sample_sums(x)) * steps
-  tic()
-  the_reps <- rarefy_lib_otu_rep(x, libsizes = libsizes, rep = rep)
-  toc()
-  print("Step 1 complete")
-  return(the_reps)
-  tic()
-  the_reps_fixed <- repotu_libsize_df(the_reps)
-  toc()
-  print("Step 2 complete")
-  tic()
-  the_reps_q <- div_quantile_df(the_reps_fixed, diversity = diversity, quantiles = c(lower.q, upper.q))
-  toc()
-  the_reps_q
-}
-
-alphaconeV2 <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
+alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975, replace = FALSE) {
   libsizes <- max(sample_sums(x)) * steps
   samplenames <- sample_names(x)
   bylibsize <- vector("list", length(libsizes))
   for (i in seq_along(bylibsize)) {
-    bylibsize[[i]] <- lapply(seq_len(rep), function(y) rarefy_even_depth(x, libsizes[i], verbose = FALSE))
+    bylibsize[[i]] <- lapply(seq_len(rep), function(y) rarefy_even_depth(x, libsizes[i], verbose = FALSE, replace = replace))
   }
   for (i in seq_along(bylibsize)) {
     for (j in seq_along(bylibsize[[i]])) {
@@ -116,7 +116,7 @@ alphaconeV2 <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.0
         otutable <- as.data.frame(otutable)
         tmpnames <- rownames(otutable)
       }
-      bylibsize[[i]][[j]] <- vegan::diversity(otutable, index = diversity)
+      bylibsize[[i]][[j]] <- diversity(otutable, index = diversity)
       if (nrow(otutable) == 1) {
         names(bylibsize[[i]][[j]]) <- tmpnames
       }
@@ -132,8 +132,8 @@ alphaconeV2 <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.0
   rownames(bylibsize) <- NULL
   bylibsize <- bylibsize %>% group_by(Sample, LibSize) %>%
     summarise(LowerQ = quantile(DiversityIndex, lower.q), UpperQ = quantile(DiversityIndex, upper.q))
-  #bylibsize
-  as.data.frame(bylibsize)
+  bylibsize <- as.data.frame(bylibsize)
+  bylibsize
 }
 
 

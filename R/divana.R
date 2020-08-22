@@ -22,11 +22,12 @@
 #' complete_analysis <- divana(example, "time")
 #'
 #' @export
-divana <- function(x, xvar, sample = "SampleID", lowabun = 0.01, reps = 1000, alphadiv = "Shannon", taxcols = NULL, divcols = NULL, betatransform = "hellinger", betadist = "bray"){
+divana <- function(x, xvar, sample = "Sample", lowabun = 0.01, reps = 1000, alphadiv = "Shannon", taxcols = NULL, divcols = NULL, betatransform = "hellinger", betadist = "bray"){
   #Taxonomic Bar Graph %
   fulltaxbar <- fullbartax(x, xvar, lowabun = lowabun, taxcols)
   #Rarefy Curve
-  rarecurve <- rarecurve(x)
+  xrare <- rarefy_whole_rep(x, rep = reps)
+  rarecurve <- rarecurve(xrare, sample = sample)
   #Multiple Rarefying
   multirare <- mirl(x)
   multirare_df <- repotu_df(multirare)

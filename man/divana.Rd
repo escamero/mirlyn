@@ -7,7 +7,7 @@
 divana(
   x,
   xvar,
-  sample = "SampleID",
+  sample = "Sample",
   lowabun = 0.01,
   reps = 1000,
   alphadiv = "Shannon",

@@ -13,4 +13,5 @@
 #' @importFrom vegan vegdist decostand
 #' @importFrom dplyr %>% group_by summarise
 #' @importFrom parallel mclapply
+#' @importFrom vegan diversity
 NULL

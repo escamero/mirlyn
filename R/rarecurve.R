@@ -31,10 +31,10 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 #' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
 #'
 #' @export
-rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.05, to = 1, by = 0.05), set.seed = NULL, mc.cores = 1L){
+rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), set.seed = NULL, mc.cores = 1L, intercept = TRUE){
   if (!is.null(set.seed)) set.seed(set.seed)
   libsizes <- sample_sums(x)
-  libsizes <- max(libsize) * steps
+  libsizes <- max(libsizes) * steps
   samplenames <- colnames(otu_table(x))
   rarefy_rep <- mclapply(seq_len(rep), function(y) rarefy_whole(x, steps = steps), mc.cores = mc.cores)
   all_Obs <- lapply(rarefy_rep, function(y) as.matrix(y[, 2, drop = FALSE]))
@@ -42,7 +42,12 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.05, to = 1, by =
   all_Obs <- rowMeans(all_Obs)
   rarefy_rep <- rarefy_rep[[1]]
   rarefy_rep$ObsASVCount <- all_Obs
-  rarefy_rep
+  if (intercept) {
+    zeroLibSize <- data.frame(Sample = unique(rarefy_rep$Sample), ObsASVCount = 0, LibSize = 0, row.names = NULL)
+    rbind(rarefy_rep, zeroLibSize)
+  } else {
+    rarefy_rep
+  }
 }
 
 #' Rarefaction Curve
@@ -62,11 +67,11 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.05, to = 1, by =
 #' rarecuruve_ex <- rarecurve(rarefy_whole_rep_ex, sample = "Sample")
 #'
 #' @export
-rarecurve <- function(x, sample = NULL){
+rarecurve <- function(x, sample = "Sample"){
   if (is.null(sample)){
-    curve <- ggplot(x, aes_string(x = libsize, y = ObsASVCount))
+    curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount"))
     }else{
-    curve <- ggplot(x, aes_string(x = libsize, y = ObsASVCount, colour = sample))}
+    curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount", colour = sample))}
   curve + geom_line()+theme_bw()+scale_y_continuous(limits=c(0, max(x$ObsASVCount)*1.01))
 }
 

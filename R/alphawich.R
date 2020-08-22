@@ -16,7 +16,7 @@
 #' @export
 alphadivDF <- function(x, diversity="shannon"){
   md <- sample_data(x[[1]])
-  div <- vegan::diversity(t(repotu_df(x)), index=diversity)
+  div <- diversity(t(repotu_df(x)), index=diversity)
   final <- cbind(md, DiversityIndex = div)
   final
 }
