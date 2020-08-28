@@ -17,3 +17,10 @@ x the modified phyloseq object.
 \description{
 The asv_rename function will assign unique ASV identifiers that are easy to each sequence variant and will write a tsv file to your working directory for a reference list of all ASV names.
 }
+\examples{
+library(mirlyn)
+library(phyloseq)
+data(GlobalPatterns)
+asv_rename(GlobalPatterns)
+
+}

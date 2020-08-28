@@ -29,6 +29,9 @@ data(example)
 mirlexample <- mirl(example, rep = 10)
 betamatPCA_object <- betamatPCA(mirlexample)
 
-betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 10, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
+\dontrun{
+betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 100,
+   colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
+}
 
 }

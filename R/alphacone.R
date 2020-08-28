@@ -90,6 +90,7 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #' @param diversity The diversity index. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.
 #' @param lower.q The lower quantile for the distribution cone. By default it will provide the 2.5th.
 #' @param upper.q The upper quantile for the distribution cone. By default, the 97.5th will be applied.
+#' @param replace Whether to use replacement during sampling.
 #'
 #' @return A ggplot object showing the distribution of the diversity index.
 #'
@@ -97,8 +98,9 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #' library(mirlyn)
 #' data(example)
 #'
-#' alphacone_example <- alphacone(example, rep = 10)
-#'
+#' \dontrun{
+#' alphacone_example <- alphacone(example, rep = 100)
+#' }
 #'
 #' # Don't think this works on multiple samples right now.
 #' @export
@@ -107,7 +109,7 @@ alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01
   samplenames <- sample_names(x)
   bylibsize <- vector("list", length(libsizes))
   for (i in seq_along(bylibsize)) {
-    bylibsize[[i]] <- lapply(seq_len(rep), function(y) rarefy_even_depth(x, libsizes[i], verbose = FALSE, replace = replace))
+    bylibsize[[i]] <- lapply(seq_len(rep), function(y) suppressMessages(rarefy_even_depth(x, libsizes[i], verbose = FALSE, replace = replace)))
   }
   for (i in seq_along(bylibsize)) {
     for (j in seq_along(bylibsize[[i]])) {

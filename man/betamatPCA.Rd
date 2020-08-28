@@ -20,11 +20,11 @@ A prcomp object
 betamatPCA() will perform a PCA on the mirl() object.
 }
 \examples{
- library(mirlyn)
- data(example)
- mirlexample <- mirl(example, rep = 10)
-
- betamatPCA_object <- betamatPCA(mirlexample, dsim = "jaccard")
-
+library(mirlyn)
+data(example)
+\dontrun{
+mirlexample <- mirl(example, rep = 100)
+betamatPCA_object <- betamatPCA(mirlexample, dsim = "jaccard")
+}
 
 }

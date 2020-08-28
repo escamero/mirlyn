@@ -1,7 +1,7 @@
 #Lowabundance_tax clumps low abundance taxa into a "Low abundance" group. Default is set to 1%.
 lowabundance_tax <- function(x, taxrank = "Genus", lower_limit = 0.01) {
   x <- microbiome::transform(x, "compositional")
-  x <- phyloseq::tax_glom(x, taxrank = taxrank)
+  x <- suppressMessages(phyloseq::tax_glom(x, taxrank = taxrank))
   x <- phyloseq::psmelt(x)
   x[[taxrank]] <- as.character(x[[taxrank]])
   x[[taxrank]][x[["Abundance"]] < lower_limit] <- "<1% abundance"
@@ -10,7 +10,7 @@ lowabundance_tax <- function(x, taxrank = "Genus", lower_limit = 0.01) {
 
 #If not using low abundance, will just use the raw sequence count values extracted from the phyloseq object using psmelt.
 raw_tax <- function(x, taxrank = "Genus"){
-  x <- phyloseq::tax_glom(x, taxrank = taxrank)
+  x <- suppressMessages(phyloseq::tax_glom(x, taxrank = taxrank))
   x <- phyloseq::psmelt(x)
   x
 }
@@ -31,7 +31,8 @@ raw_tax <- function(x, taxrank = "Genus"){
 #' @examples
 #' library(mirlyn)
 #' data(example)
-#' cols <- c("black","darkgoldenrod1","dodgerblue","deeppink4","chartreuse3","burlywood4","navy","blueviolet", "tan2","lavenderblush3","cyan4")
+#' cols <- c("black","darkgoldenrod1","dodgerblue","deeppink4","chartreuse3",
+#'    "burlywood4","navy","blueviolet", "tan2","lavenderblush3","cyan4")
 #' bartax(example, "Sample", lowabun = 0.01, yvar = "Abundance", taxrank = "Phylum", cols)
 #'
 #' @export

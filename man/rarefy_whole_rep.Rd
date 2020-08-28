@@ -21,6 +21,10 @@ rarefy_whole_rep(
 \item{steps}{The steps in library sizes to rarefy to.}
 
 \item{set.seed}{The seed value for reproducibility.}
+
+\item{mc.cores}{From \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
+
+\item{intercept}{Create data points at (0,0).}
 }
 \value{
 A dataframe containing the observed sequence counts for samples of varying rarefied library sizes.
@@ -32,6 +36,8 @@ rarefy_whole_rep() will rarefy each sample for different library sizes repeatedl
 library(mirlyn)
 data(example)
 
-rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
+\dontrun{
+rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 100)
+}
 
 }

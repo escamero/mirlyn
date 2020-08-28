@@ -1,6 +1,6 @@
 Package: mirlyn
 Title: Multiple Iterations of Rarefying for Library Normalization
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Ellen S.",
            family = "Cameron",
@@ -9,7 +9,7 @@ Authors@R:
       person(given="Benjamin Jean-Marie", 
            family="Tremblay", 
            role="aut", 
-           email = "benjamin.tremblay@cragenomica.es", 
+           email = "b2tremblay@uwaterloo.ca", 
            comment=c(ORCID="0000-0002-7441-2951")))
 Description: What the package does (one paragraph).
 License: GPL-3
@@ -20,3 +20,5 @@ RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
 Imports: phyloseq, ggplot2, vegan, stats, factoextra, methods, readr, microbiome,
   Biostrings, dplyr, parallel
+Suggests: 
+    testthat

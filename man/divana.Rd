@@ -48,6 +48,8 @@ divana() will conduct a complete analysis from taxonomic composition bar charts 
 library(mirlyn)
 data(example)
 
+\dontrun{
 complete_analysis <- divana(example, "time")
+}
 
 }

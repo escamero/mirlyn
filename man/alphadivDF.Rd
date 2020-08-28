@@ -21,6 +21,9 @@ alphadivDF() will generate a dataframe of alpha-diversity values from the mirl o
 library(mirlyn)
 data(example)
 
-mirlexample <- mirl(example, rep = 10)
+\dontrun{
+mirlexample <- mirl(example, rep = 100)
 alphadiv_df <- alphadivDF(mirlexample)
+}
+
 }

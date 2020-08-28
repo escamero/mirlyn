@@ -21,6 +21,8 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 #' @param rep The number of replicates to be performed. More replicates will take longer to conduct but will provide a smoother distribution for analyses.
 #' @param steps The steps in library sizes to rarefy to.
 #' @param set.seed The seed value for reproducibility.
+#' @param mc.cores From [parallel::mclapply()].
+#' @param intercept Create data points at (0,0).
 #'
 #' @return A dataframe containing the observed sequence counts for samples of varying rarefied library sizes.
 #'
@@ -28,7 +30,9 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 #' library(mirlyn)
 #' data(example)
 #'
-#' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
+#' \dontrun{
+#' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 100)
+#' }
 #'
 #' @export
 rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), set.seed = NULL, mc.cores = 1L, intercept = TRUE){
@@ -36,7 +40,7 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by 
   libsizes <- sample_sums(x)
   libsizes <- max(libsizes) * steps
   samplenames <- colnames(otu_table(x))
-  rarefy_rep <- mclapply(seq_len(rep), function(y) rarefy_whole(x, steps = steps), mc.cores = mc.cores)
+  rarefy_rep <- mclapply(seq_len(rep), function(y) suppressMessages(rarefy_whole(x, steps = steps)), mc.cores = mc.cores)
   all_Obs <- lapply(rarefy_rep, function(y) as.matrix(y[, 2, drop = FALSE]))
   all_Obs <- do.call(cbind, all_Obs)
   all_Obs <- rowMeans(all_Obs)
@@ -63,15 +67,18 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by 
 #' library(mirlyn)
 #' data(example)
 #'
-#' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
+#' \dontrun{
+#' rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 100)
 #' rarecuruve_ex <- rarecurve(rarefy_whole_rep_ex, sample = "Sample")
+#' }
 #'
 #' @export
 rarecurve <- function(x, sample = "Sample"){
   if (is.null(sample)){
     curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount"))
     }else{
-    curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount", colour = sample))}
+    curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount", colour = sample))
+  }
   curve + geom_line()+theme_bw()+scale_y_continuous(limits=c(0, max(x$ObsASVCount)*1.01))
 }
 

@@ -26,8 +26,10 @@ alphawichVis() will visualize the diversity index values generated from alphadiv
 library(mirlyn)
 data(example)
 
-example <- mirl(example, rep = 10)
+\dontrun{
+example <- mirl(example, rep = 100)
 example <- alphadivDF(example)
 alphawichVis(example, "time")
+}
 
 }

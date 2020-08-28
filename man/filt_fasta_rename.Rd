@@ -4,15 +4,15 @@
 \alias{filt_fasta_rename}
 \title{Assign ASV identifiers to FASTA}
 \usage{
-filt_fasta_rename(filename, fixed)
+filt_fasta_rename(fasta, fixed = file.path(getwd(), "ASVids.tsv"))
 }
 \arguments{
-\item{filename}{The FASTA file to assign ASV identifiers to.}
+\item{fasta}{The FASTA file to assign ASV identifiers to.}
 
-\item{fixed}{The ASV identifiers.}
+\item{fixed}{The ASV reference list created by \code{\link[=asv_rename]{asv_rename()}}.}
 }
 \value{
-FASTA file with modified ASV identifiers.
+\code{NULL}. The FASTA file is modified in place.
 }
 \description{
 The filt_fasta_rename function will assign corresponding ASV identifiers to a FASTA file for use in other applications.

@@ -19,7 +19,9 @@
 #' library(mirlyn)
 #' data(example)
 #'
+#' \dontrun{
 #' complete_analysis <- divana(example, "time")
+#' }
 #'
 #' @export
 divana <- function(x, xvar, sample = "Sample", lowabun = 0.01, reps = 1000, alphadiv = "Shannon", taxcols = NULL, divcols = NULL, betatransform = "hellinger", betadist = "bray"){

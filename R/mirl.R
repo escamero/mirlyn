@@ -1,5 +1,6 @@
 # Used to calculate library sizes
 sample_sums <- phyloseq::sample_sums
+
 #' Multiple Iterations of Rarefying Libraries
 #'
 #' mirl() will repeatedly rarefy to a user defined library size, for a specified number of replications to characterize the variation introduced through random subsampling. The implementation of mirl() allows for rarefying to be a statistically valid library size normalization technique for diversity analyses. Users are encouraged to conduct exploratory analysis to identify optimal rarefied library sizes for their data that minimizes variation in samples. Users may have to choose between rarefying to smaller than preferred library sizes or discarding small library size samples but the implementation of mirl() generally allows for rarefying to small library sizes at the loss of resolution and precision in results.
@@ -18,10 +19,12 @@ sample_sums <- phyloseq::sample_sums
 #' library(mirlyn)
 #' data(example)
 #'
-#' mirl_object <- mirl(example, libsize = 10000, rep = 10, set.seed=120)
+#' \dontrun{
+#' mirl_object <- mirl(example, libsize = 10000, rep = 100, set.seed=120)
+#' }
 #'
 #' @export
 mirl <- function(x, libsize=min(sample_sums(x)), rep=1000, set.seed=NULL, trimOTUs=FALSE, replace=FALSE){
   if (!is.null(set.seed)) set.seed(set.seed)
-  replicate(rep, rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs, replace = replace, verbose = FALSE))
+  replicate(rep, suppressMessages(rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs, replace = replace, verbose = FALSE)))
 }

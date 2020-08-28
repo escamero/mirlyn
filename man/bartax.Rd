@@ -35,7 +35,8 @@ The bartax() function will create taxonomic composition barcharts. If desired, l
 \examples{
 library(mirlyn)
 data(example)
-cols <- c("black","darkgoldenrod1","dodgerblue","deeppink4","chartreuse3","burlywood4","navy","blueviolet", "tan2","lavenderblush3","cyan4")
+cols <- c("black","darkgoldenrod1","dodgerblue","deeppink4","chartreuse3",
+   "burlywood4","navy","blueviolet", "tan2","lavenderblush3","cyan4")
 bartax(example, "Sample", lowabun = 0.01, yvar = "Abundance", taxrank = "Phylum", cols)
 
 }

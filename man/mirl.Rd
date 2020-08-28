@@ -36,6 +36,8 @@ mirl() will repeatedly rarefy to a user defined library size, for a specified nu
 library(mirlyn)
 data(example)
 
-mirl_object <- mirl(example, libsize = 10000, rep = 10, set.seed=120)
+\dontrun{
+mirl_object <- mirl(example, libsize = 10000, rep = 100, set.seed=120)
+}
 
 }

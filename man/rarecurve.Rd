@@ -21,7 +21,9 @@ rarecurve() will generate a visualization of the rarefaction curve showing the a
 library(mirlyn)
 data(example)
 
-rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 10)
+\dontrun{
+rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 100)
 rarecuruve_ex <- rarecurve(rarefy_whole_rep_ex, sample = "Sample")
+}
 
 }

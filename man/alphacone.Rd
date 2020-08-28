@@ -26,6 +26,8 @@ alphacone(
 \item{lower.q}{The lower quantile for the distribution cone. By default it will provide the 2.5th.}
 
 \item{upper.q}{The upper quantile for the distribution cone. By default, the 97.5th will be applied.}
+
+\item{replace}{Whether to use replacement during sampling.}
 }
 \value{
 A ggplot object showing the distribution of the diversity index.
@@ -37,8 +39,9 @@ alphacone() will generate a distribution plot of the alpha diversity index for d
 library(mirlyn)
 data(example)
 
-alphacone_example <- alphacone(example, rep = 10)
-
+\dontrun{
+alphacone_example <- alphacone(example, rep = 100)
+}
 
 # Don't think this works on multiple samples right now.
 }
