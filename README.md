@@ -10,8 +10,14 @@ A variety of normalization techniques have been proposed for amplicon sequencing
 
 ### Suggested Resources
 Cameron, E.S., Schmidt, P.J., Tremblay, B.J.-M., Emelko, M.B., Müller, K.M., 2020. To rarefy or not to rarefy: Enhancing microbial community analysis through next-generation sequencing (In preparation).
+
+
 Gloor, G.B., Macklaim, J.M., Pawlowsky-Glahn, V., Egozcue, J.J., 2017. Microbiome datasets are compositional: And this is not optional. Front. Microbiol. 8, 1–6. https://doi.org/10.3389/fmicb.2017.02224
+
+
 McMurdie, P.J., Holmes, S., 2014. Waste not, want not: Why rarefying microbiome data is inadmissible. PLoS Comput. Biol. 10. https://doi.org/10.1371/journal.pcbi.1003531
+
+
 Weiss, S., Xu, Z.Z., Peddada, S., Amir, A., Bittinger, K., Gonzalez, A., Lozupone, C., Zaneveld, J.R., Vázquez-Baeza, Y., Birmingham, A., Hyde, E.R., Knight, R., 2017. Normalization and microbial differential abundance strategies depend upon data characteristics. Microbiome 5, 1–18. https://doi.org/10.1186/s40168-017-0237-y
 
 ## Installation
