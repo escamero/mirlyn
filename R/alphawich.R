@@ -31,7 +31,7 @@ alphadivDF <- function(x, diversity="shannon"){
 #' @param alphawichDF The alphawichDF object.
 #' @param yvar The yvar column name. By default, the diversity index value will be plotted.
 #' @param xvar The xvar column name. Users must specify the metadata column to be plotted on the x-axis.
-#' @param colorvar The metadat column name that will be used for colour assignment.
+#' @param colorvar The metadata column name that will be used for colour assignment.
 #'
 #' @return A ggplot object.
 #'
@@ -43,7 +43,7 @@ alphadivDF <- function(x, diversity="shannon"){
 #' \dontrun{
 #' example <- mirl(example, rep = 100)
 #' example <- alphadivDF(example)
-#' alphawichVis(example, "time")
+#' alphawichVis(example, "Sample")
 #' }
 #'
 #' @export

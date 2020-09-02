@@ -81,18 +81,18 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #   the_reps_q
 # }
 
-#' Alpha Diversity Index Distributions
+#' Alpha Diversity Metric Distributions
 #'
-#' alphacone() will generate a distribution plot of the alpha diversity index for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity index and the perceived variation in the index values. Generations of the distribution of the alpha diversity index allows for a comprehensive examination of the alpha diversity index values to account for variation introduced into the diversity index as an artifact of rarefied library size.
+#' alphacone() will generate a dataframe of the alpha diversity metric for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity metric and the perceived variation in the metric values. Generations of the distribution of the alpha diversity metric allows for a comprehensive examination of the alpha diversity metric values to account for variation introduced into the diversity metric as an artifact of rarefied library size.
 #' @param x The phyloseq object.
 #' @param rep The number of replications of rarefying to perform.
 #' @param steps The library sizes to rarefy to as a function of the library sizes of samples.
-#' @param diversity The diversity index. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.
+#' @param diversity The diversity metric. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.
 #' @param lower.q The lower quantile for the distribution cone. By default it will provide the 2.5th.
 #' @param upper.q The upper quantile for the distribution cone. By default, the 97.5th will be applied.
 #' @param replace Whether to use replacement during sampling.
 #'
-#' @return A ggplot object showing the distribution of the diversity index.
+#' @return A dataframe of the distribution of the diversity metric.
 #'
 #' @examples
 #' library(mirlyn)
@@ -102,7 +102,7 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #' alphacone_example <- alphacone(example, rep = 100)
 #' }
 #'
-#' # Don't think this works on multiple samples right now.
+#'
 #' @export
 alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975, replace = FALSE) {
   libsizes <- max(sample_sums(x)) * steps
@@ -138,7 +138,31 @@ alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01
   bylibsize
 }
 
-
+#' Alpha Diversity Metric Distributions Visualization
+#' alphaconeVis() will generate a visualization of the the distributions of the alpha diversity metric dataframe generated using alphacone()
+#' @param x The alphacone() dataframe
+#' @param cols The metadata column that will be used for colour assignment
+#' @param alpha The opacity of the geom_ribbon. By default, a value of 0.7 will be applied. For full opacity, set alpha = 1, for more transparency, decrease alpha accordingly.
+#'
+#' @return a ggplot object.
+#'
+#' @examples
+#' library(mirlyn)
+#' data(example)
+#'
+#' \dontrun{
+#' alphacone_example <- alphacone(example, rep = 100)
+#' }
+#'
+#' \dontrun{
+#' alphaconevis(alphacone_example, cols = "Sample")
+#' }
+#'
+#' @export
+alphaconeVis <- function(x, cols, alpha = 0.7){
+  alphaconevis <- ggplot(x)+geom_ribbon(aes(ymin = LowerQ, ymax = UpperQ, fill = cols), alpha = alpha)
+  alphaconevis
+}
 
 
 

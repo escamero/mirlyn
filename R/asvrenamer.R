@@ -33,7 +33,7 @@ asv_rename <- function(x, file = file.path(getwd(), "ASVids.tsv")){
 #' @return `NULL`. The FASTA file is modified in place.
 #'
 #' @export
-filt_fasta_rename <- function(fasta, fixed = file.path(getwd(), "ASVids.tsv")) {
+fasta_rename <- function(fasta, fixed = file.path(getwd(), "ASVids.tsv")) {
   d <- Biostrings::readDNAStringSet(fasta)
   fixed <- readr::read_tsv(fixed)
   fixed <- structure(fixed$ASVid, names = fixed$Variant)
