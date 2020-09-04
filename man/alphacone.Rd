@@ -2,7 +2,7 @@
 % Please edit documentation in R/alphacone.R
 \name{alphacone}
 \alias{alphacone}
-\title{Alpha Diversity Index Distributions}
+\title{Alpha Diversity Metric Distributions}
 \usage{
 alphacone(
   x,
@@ -21,7 +21,7 @@ alphacone(
 
 \item{steps}{The library sizes to rarefy to as a function of the library sizes of samples.}
 
-\item{diversity}{The diversity index. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.}
+\item{diversity}{The diversity metric. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.}
 
 \item{lower.q}{The lower quantile for the distribution cone. By default it will provide the 2.5th.}
 
@@ -30,10 +30,10 @@ alphacone(
 \item{replace}{Whether to use replacement during sampling.}
 }
 \value{
-A ggplot object showing the distribution of the diversity index.
+A dataframe of the distribution of the diversity metric.
 }
 \description{
-alphacone() will generate a distribution plot of the alpha diversity index for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity index and the perceived variation in the index values. Generations of the distribution of the alpha diversity index allows for a comprehensive examination of the alpha diversity index values to account for variation introduced into the diversity index as an artifact of rarefied library size.
+alphacone() will generate a dataframe of the alpha diversity metric for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity metric and the perceived variation in the metric values. Generations of the distribution of the alpha diversity metric allows for a comprehensive examination of the alpha diversity metric values to account for variation introduced into the diversity metric as an artifact of rarefied library size.
 }
 \examples{
 library(mirlyn)
@@ -43,5 +43,5 @@ data(example)
 alphacone_example <- alphacone(example, rep = 100)
 }
 
-# Don't think this works on multiple samples right now.
+
 }

@@ -5,12 +5,12 @@
 \alias{example}
 \title{An example phyloseq object.}
 \format{
-A phyloseqobject, with 6 samples.
+A \link[phyloseq:phyloseq-class]{phyloseq::phyloseq} object.
 }
 \usage{
 example
 }
 \description{
-The description.
+A phyloseq object with six samples.
 }
 \keyword{datasets}

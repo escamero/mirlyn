@@ -1,6 +1,6 @@
 #' An example phyloseq object.
 #'
-#' The description.
+#' A phyloseq object with six samples.
 #'
-#' @format A phyloseqobject, with 6 samples.
+#' @format A [phyloseq::phyloseq-class] object.
 "example"

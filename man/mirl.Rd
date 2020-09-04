@@ -6,7 +6,7 @@
 \usage{
 mirl(
   x,
-  libsize = min(sample_sums(x)),
+  libsize = min(phyloseq::sample_sums(x)),
   rep = 1000,
   set.seed = NULL,
   trimOTUs = FALSE,

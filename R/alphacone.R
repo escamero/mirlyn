@@ -1,21 +1,8 @@
-
-
 rarefy_rep_otu <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), set.seed = NULL){
   if (!is.null(set.seed)) set.seed(set.seed)
   rarefy_rep_otu <- lapply(seq_len(rep), function(y) rarefy_whole(x, steps = steps))
   rarefy_rep_otu
 }
-#Old function for alphacone
-#functionRep <- function(x, libs = c(15000, 16000, 17000, 18000, 19000), rep = 1000, set.seed = NULL) {
- # if (!is.null(set.seed)) set.seed(set.seed)
-  #out <- vector("list", length(libs))
-  #for (i in seq_along(out)) {
-   # message("Performing replicates for library size of ", libs[i], "...")
-    #out[[i]] <- replicate(rep, rarefy_even_depth(x, libs[i], verbose = FALSE))
-  #}
-  #names(out) <- libs
-  #out
-#}
 
 rarefy_lib_otu <- function(x, libsizes) {
   lapply(libsizes, function(y) otu_table(rarefy_even_depth(x, y, verbose = FALSE)))
@@ -63,23 +50,6 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
   rownames(y2) <- NULL
   y2
 }
-
-# alphacone <- function(x, rep = 1000, steps = seq(from = 0.1, to = 1, by = 0.1), diversity = "shannon", lower.q = 0.025, upper.q = 0.975) {
-#   libsizes <- max(sample_sums(x)) * steps
-#   tic()
-#   the_reps <- rarefy_lib_otu_rep(x, libsizes = libsizes, rep = rep)
-#   toc()
-#   print("Step 1 complete")
-#   return(the_reps)
-#   tic()
-#   the_reps_fixed <- repotu_libsize_df(the_reps)
-#   toc()
-#   print("Step 2 complete")
-#   tic()
-#   the_reps_q <- div_quantile_df(the_reps_fixed, diversity = diversity, quantiles = c(lower.q, upper.q))
-#   toc()
-#   the_reps_q
-# }
 
 #' Alpha Diversity Metric Distributions
 #'

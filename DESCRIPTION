@@ -6,12 +6,26 @@ Authors@R:
            family = "Cameron",
            role = c("aut", "cre"),
            email = "escamero@uwaterloo.ca"), 
-      person(given="Benjamin Jean-Marie", 
-           family="Tremblay", 
-           role="aut", 
+      person(given = "Benjamin Jean-Marie", 
+           family = "Tremblay", 
+           role = "aut", 
            email = "b2tremblay@uwaterloo.ca", 
-           comment=c(ORCID="0000-0002-7441-2951")))
-Description: mirlyn is a package that allows for library size normalization for diversity analysis. This package also includes supplementary functions to generate taxonomic composition bar graphs and the assignment of ASV names to unique and easily referenced identities. The majority of the functions included in mirlyn serve to account for the issue of disparity in liblrary sizes between amplicon sequencing samples. The variation seen between library sizes of different amplicon sequencing samples is not representative of true biological variation and requires a normalization technique to allow for sample comparison in diversity analysis without inherent bias. While a variety of library normalization techniques have been proposed in the literature, mirlyn repeatedly rarefies samples to characterize the sequence data lost in the random subsampling process. The characterization of variation through rarefying allows for the creation of comprehensive computational replicates that provide stronger representation of the original biological communities while also accounting for differences in library size. 
+           comment = c(ORCID = "0000-0002-7441-2951")))
+Description: mirlyn is a package that allows for library size normalization for
+  diversity analysis. This package also includes supplementary functions to
+  generate taxonomic composition bar graphs and the assignment of ASV names to
+  unique and easily referenced identities. The majority of the functions
+  included in mirlyn serve to account for the issue of disparity in liblrary
+  sizes between amplicon sequencing samples. The variation seen between library
+  sizes of different amplicon sequencing samples is not representative of true
+  biological variation and requires a normalization technique to allow for
+  sample comparison in diversity analysis without inherent bias. While a variety
+  of library normalization techniques have been proposed in the literature,
+  mirlyn repeatedly rarefies samples to characterize the sequence data lost in
+  the random subsampling process. The characterization of variation through 
+  rarefying allows for the creation of comprehensive computational replicates
+  that provide stronger representation of the original biological communities
+  while also accounting for differences in library size. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

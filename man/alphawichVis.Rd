@@ -13,7 +13,7 @@ alphawichVis(alphawichDF, xvar, yvar = "DiversityIndex", colorvar = NULL)
 
 \item{yvar}{The yvar column name. By default, the diversity index value will be plotted.}
 
-\item{colorvar}{The metadat column name that will be used for colour assignment.}
+\item{colorvar}{The metadata column name that will be used for colour assignment.}
 }
 \value{
 A ggplot object.
@@ -29,7 +29,7 @@ data(example)
 \dontrun{
 example <- mirl(example, rep = 100)
 example <- alphadivDF(example)
-alphawichVis(example, "time")
+alphawichVis(example, "Sample")
 }
 
 }

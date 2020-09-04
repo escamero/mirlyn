@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 *.swp
+.DS_Store

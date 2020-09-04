@@ -1,5 +1,5 @@
 # Used to calculate library sizes
-sample_sums <- phyloseq::sample_sums
+# sample_sums <- phyloseq::sample_sums
 
 #' Multiple Iterations of Rarefying Libraries
 #'
@@ -24,7 +24,7 @@ sample_sums <- phyloseq::sample_sums
 #' }
 #'
 #' @export
-mirl <- function(x, libsize=min(sample_sums(x)), rep=1000, set.seed=NULL, trimOTUs=FALSE, replace=FALSE){
+mirl <- function(x, libsize=min(phyloseq::sample_sums(x)), rep=1000, set.seed=NULL, trimOTUs=FALSE, replace=FALSE){
   if (!is.null(set.seed)) set.seed(set.seed)
   replicate(rep, suppressMessages(rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs, replace = replace, verbose = FALSE)))
 }
