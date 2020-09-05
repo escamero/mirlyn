@@ -9,7 +9,7 @@ Authors@R:
       person(given = "Benjamin Jean-Marie", 
            family = "Tremblay", 
            role = "aut", 
-           email = "b2tremblay@uwaterloo.ca", 
+           email = "benjamin.tremblay@uwaterloo.ca", 
            comment = c(ORCID = "0000-0002-7441-2951")))
 Description: mirlyn is a package that allows for library size normalization for
   diversity analysis. This package also includes supplementary functions to
