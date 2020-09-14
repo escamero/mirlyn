@@ -4,7 +4,12 @@
 \alias{alphawichVis}
 \title{Visualization of Alpha Diversity Indexes}
 \usage{
-alphawichVis(alphawichDF, xvar, yvar = "DiversityIndex", colorvar = NULL)
+alphawichVis(
+  alphawichDF,
+  xvar = "Sample",
+  yvar = "DiversityIndex",
+  colorvar = NULL
+)
 }
 \arguments{
 \item{alphawichDF}{The alphawichDF object.}

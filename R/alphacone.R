@@ -129,7 +129,7 @@ alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01
 #' }
 #'
 #' @export
-alphaconeVis <- function(x, cols, alpha = 0.7){
+alphaconeVis <- function(x, cols = "Sample", alpha = 0.7){
   alphaconevis <- ggplot(x)+geom_ribbon(aes(ymin = LowerQ, ymax = UpperQ, fill = cols), alpha = alpha)
   alphaconevis
 }

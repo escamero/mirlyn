@@ -47,7 +47,7 @@ alphadivDF <- function(x, diversity="shannon"){
 #' }
 #'
 #' @export
-alphawichVis <- function(alphawichDF, xvar, yvar="DiversityIndex", colorvar=NULL) {
+alphawichVis <- function(alphawichDF, xvar = "Sample", yvar="DiversityIndex", colorvar=NULL) {
   if (is.null(colorvar)) {
     alpha <- ggplot(alphawichDF, aes_string(x = xvar, y = yvar))
   } else {

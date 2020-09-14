@@ -4,7 +4,7 @@
 \alias{fullbartax}
 \title{Taxonomic Composition Stacked Barcharts - 7 levels}
 \usage{
-fullbartax(x, xvar, lowabun = 0.01, yvar = "Abundance", cols = NULL)
+fullbartax(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", cols = NULL)
 }
 \arguments{
 \item{x}{is a phyloseq object.}

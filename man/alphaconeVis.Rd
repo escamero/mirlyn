@@ -5,7 +5,7 @@
 \title{Alpha Diversity Metric Distributions Visualization
 alphaconeVis() will generate a visualization of the the distributions of the alpha diversity metric dataframe generated using alphacone()}
 \usage{
-alphaconeVis(x, cols, alpha = 0.7)
+alphaconeVis(x, cols = "Sample", alpha = 0.7)
 }
 \arguments{
 \item{x}{The alphacone() dataframe}

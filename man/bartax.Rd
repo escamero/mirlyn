@@ -6,7 +6,7 @@
 \usage{
 bartax(
   x,
-  xvar,
+  xvar = "Sample",
   lowabun = 0.01,
   yvar = "Abundance",
   taxrank = "Genus",

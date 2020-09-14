@@ -1,5 +1,6 @@
 #Lowabundance_tax clumps low abundance taxa into a "Low abundance" group. Default is set to 1%.
 lowabundance_tax <- function(x, taxrank = "Genus", lower_limit = 0.01) {
+  otu_table(x) <- otu_table(x)[!is.na(tax_table(x)[, taxrank])]
   x <- microbiome::transform(x, "compositional")
   x <- suppressMessages(phyloseq::tax_glom(x, taxrank = taxrank))
   x <- phyloseq::psmelt(x)
@@ -36,7 +37,7 @@ raw_tax <- function(x, taxrank = "Genus"){
 #' bartax(example, "Sample", lowabun = 0.01, yvar = "Abundance", taxrank = "Phylum", cols)
 #'
 #' @export
-bartax <- function(x, xvar, lowabun = 0.01, yvar = "Abundance", taxrank = "Genus", cols = NULL){
+bartax <- function(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", taxrank = "Genus", cols = NULL){
   if (!is.null(lowabun)){
     x <- lowabundance_tax(x, taxrank = taxrank, lower_limit = lowabun)
   }else{
@@ -66,7 +67,7 @@ bartax <- function(x, xvar, lowabun = 0.01, yvar = "Abundance", taxrank = "Genus
 #' }
 #'
 #' @export
-fullbartax <- function(x, xvar, lowabun = 0.01, yvar = "Abundance", cols = NULL){
+fullbartax <- function(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", cols = NULL){
   kingdom_plot <- bartax(x, xvar = xvar, taxrank = "Kingdom", cols = cols)
   phylum_plot <- bartax(x, xvar = xvar, taxrank = "Phylum", cols = cols)
   class_plot <- bartax(x,xvar = xvar, taxrank = "Class", cols = cols)
