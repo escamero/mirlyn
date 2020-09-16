@@ -47,13 +47,13 @@ betamatPCA <- function(x, transformation="hellinger", dsim="bray"){
 #' betamatPCA_object <- betamatPCA(mirlexample)
 #'
 #' \dontrun{
-#' betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 100,
+#' betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 10,
 #'    colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
 #' }
 #'
 #' @export
 betamatPCAvis <- function(x, geom="point", groups, reps, colours){
-  pcaplot <- fviz_pca_ind(x, geom=geom, habeillage=rep(groups, reps),palette=colours, invisible="quali")+theme_bw()
+  pcaplot <- fviz_pca_ind(x, geom=geom, habillage=rep(groups, reps),palette=colours, invisible="quali")+theme_bw()
   pcaplot
 }
 
