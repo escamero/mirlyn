@@ -77,6 +77,7 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01), diversity = "shannon", lower.q = 0.025, upper.q = 0.975, replace = FALSE) {
   libsizes <- max(sample_sums(x)) * steps
   samplenames <- sample_names(x)
+  meta <- sample_data(x)
   bylibsize <- vector("list", length(libsizes))
   for (i in seq_along(bylibsize)) {
     bylibsize[[i]] <- lapply(seq_len(rep), function(y) suppressMessages(rarefy_even_depth(x, libsizes[i], verbose = FALSE, replace = replace)))
@@ -105,6 +106,8 @@ alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01
   bylibsize <- bylibsize %>% group_by(Sample, LibSize) %>%
     summarise(LowerQ = quantile(DiversityIndex, lower.q), UpperQ = quantile(DiversityIndex, upper.q))
   bylibsize <- as.data.frame(bylibsize)
+  bylibsize <- cbind(bylibsize, meta[bylibsize$Sample, ])
+  rownames(bylibsize) <- NULL
   bylibsize
 }
 
