@@ -38,6 +38,7 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by = 0.01), set.seed = NULL, mc.cores = 1L, intercept = TRUE){
   if (!is.null(set.seed)) set.seed(set.seed)
   libsizes <- sample_sums(x)
+  meta <- sample_data(x)
   libsizes <- max(libsizes) * steps
   samplenames <- colnames(otu_table(x))
   rarefy_rep <- mclapply(seq_len(rep), function(y) suppressMessages(rarefy_whole(x, steps = steps)), mc.cores = mc.cores)
@@ -48,10 +49,13 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by 
   rarefy_rep$ObsASVCount <- all_Obs
   if (intercept) {
     zeroLibSize <- data.frame(Sample = unique(rarefy_rep$Sample), ObsASVCount = 0, LibSize = 0, row.names = NULL)
-    rbind(rarefy_rep, zeroLibSize)
+    out <- rbind(rarefy_rep, zeroLibSize)
   } else {
-    rarefy_rep
+    out <- rarefy_rep
   }
+  out <- cbind(out, meta[out$Sample, ])
+  rownames(out) <- NULL
+  out
 }
 
 #' Rarefaction Curve
