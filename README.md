@@ -1,3 +1,5 @@
+# Update: new version coming in June 2021
+
 # Multiple Iterations of Rarefying for Library Normalization (mirlyn)
 
 Differences in library sizes of amplicon sequencing datasets do not represent true biological variation. The differences observed between library sizes of different samples requires a method to control and correct for to allow for diversity analyses to be conducted accurately. Rarefying is a common normalization technique that implements the random subsampling of libraries to create rarefied libraries.
