@@ -22,7 +22,7 @@ rarefy_whole_rep(
 
 \item{set.seed}{The seed value for reproducibility.}
 
-\item{mc.cores}{From \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
+\item{mc.cores}{From \code{\link[parallel:mcdummies]{parallel::mclapply()}}.}
 
 \item{intercept}{Create data points at (0,0).}
 }

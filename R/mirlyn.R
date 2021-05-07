@@ -25,9 +25,11 @@
 #' @import phyloseq
 #' @import ggplot2
 #' @importFrom factoextra fviz_pca_ind
-#' @importFrom stats prcomp quantile
+#' @importFrom stats prcomp quantile p.adjust pnorm sd
 #' @importFrom vegan vegdist decostand
-#' @importFrom dplyr %>% group_by summarise
+#' @importFrom dplyr %>% group_by summarise filter distinct mutate_if funs
 #' @importFrom parallel mclapply
 #' @importFrom vegan diversity
+#' @importFrom reshape2 melt
+#' @importFrom tidyr gather pivot_wider
 NULL

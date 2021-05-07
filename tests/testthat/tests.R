@@ -26,7 +26,7 @@ test_that("bartax", {
 test_that("betamat", {
   pcaobj <- betamatPCA(mirlobj, dsim = "jaccard")
   expect_type(pcaobj, "list")
-  expect_type(betamatPCAvis(pcaobj, groups = LETTERS[1:6], colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00")), "list")
+  expect_type(betamatPCAvis(pcaobj, groups = LETTERS[1:6], rep = 5, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00")), "list")
 })
 
 test_that("rarecurve", {
