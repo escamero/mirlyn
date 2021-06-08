@@ -144,7 +144,7 @@ mirlyn contains two visualization options for alpha-diversity analyses. Both imp
 alphadiv_df <- alphadivDF(mirl_object)
 
 # Generates visualization from alphadiv_df. Substitute xvar for your own metadata column. 
-alphawichVis(example, xvar = "Id")
+alphawichVis(alphadiv_df, xvar = "Id")
 
 #Alphacone Functions
 # Load example data from mirlyn.

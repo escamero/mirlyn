@@ -1,3 +1,9 @@
+# mirlyn 1.2.2
+
+* Fixed another typo in README
+
+* Added an informative error message to betamatPCAvis() when the number of colours and/or reps is incorrect
+
 # mirlyn 1.2.1
 
 * Fixed typos in README

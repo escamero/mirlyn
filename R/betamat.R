@@ -58,6 +58,10 @@ betamatPCA <- function(x, transformation="hellinger", dsim="bray"){
 #'
 #' @export
 betamatPCAvis <- function(x, geom="point", groups, reps, colours){
+  if (reps * length(colours) != ncol(x$x))
+    stop("The number of colours does not match the number of groups. Please ",
+      "make sure to enter the correct number of 'reps' (e.g. the number of ",
+      "reps used in `mirl()`) and 'colours' (one colour per group).")
   pcaplot <- fviz_pca_ind(x, geom=geom, habillage=rep(groups, reps),
     palette=colours, invisible="quali", pch = 16) +
     theme_bw()
