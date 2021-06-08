@@ -94,7 +94,7 @@ library(mirlyn)
 data(example)
 
 # Generates taxonomic barchart for all taxonomic levels as a list object. 
-alltaxgraphs <- fullbartax(example, "sample")
+alltaxgraphs <- fullbartax(example, "Sample")
 
 # To show all availabe graphs
 names(alltaxgraphs)
@@ -144,7 +144,7 @@ mirlyn contains two visualization options for alpha-diversity analyses. Both imp
 alphadiv_df <- alphadivDF(mirl_object)
 
 # Generates visualization from alphadiv_df. Substitute xvar for your own metadata column. 
-alphawichVis(example, xvar = "Sample")
+alphawichVis(example, xvar = "Id")
 
 #Alphacone Functions
 # Load example data from mirlyn.
@@ -166,6 +166,6 @@ Currently, mirlyn only supports the use of PCA for beta-diversity analyses. Futu
 betamatPCA_object <- betamatPCA(mirl_object, dsim = "bray")
 
 # Generates visualization of PCA.
-betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D", "E", "F), reps = 100, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
+betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D", "E", "F"), reps = 100, colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
 ```
 

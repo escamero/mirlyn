@@ -1,3 +1,9 @@
+# mirlyn 1.2.1
+
+* Fixed typos in README
+
+* Fixed rng seed handling in `rarefy_whole_rep()` so that it is different when using multiple cores (note that this means the function is not reproducible between this version and previous ones)
+
 # mirlyn 1.2.0
 
 * Added a `mc.cores` option to `mirl()` (note that this change necessitated altering the behaviour of setting the random seed, so calls to the `mirl()` function will differ from 1.1.0 to 1.2.0)
