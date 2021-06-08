@@ -7,9 +7,10 @@
 plot_heat(x, taxlevel, taxaname, xvar, yvar, fillvar)
 }
 \arguments{
-\item{x}{is a \code{phyloseqtodf} object.}
+\item{x}{is a \code{data.frame} from \code{\link[=phyloseq_to_df]{phyloseq_to_df()}}.}
 
-\item{taxlevel}{is the taxonomic level of the taxa you're interested in. By default, it will look at the phylum level.}
+\item{taxlevel}{is the taxonomic level of the taxa you're interested in. By
+default, it will look at the phylum level.}
 
 \item{taxaname}{is the taxonomic name of interest.}
 
@@ -20,10 +21,11 @@ plot_heat(x, taxlevel, taxaname, xvar, yvar, fillvar)
 \item{fillvar}{is the column name of the abundance.}
 }
 \value{
-a \code{ggplot} object.
+A \code{ggplot} object.
 }
 \description{
-The \code{plot_heat()} function will create heatmaps visualizing the relative abundance of a taxonomic group of interest from a dataframe.
+The \code{\link[=plot_heat]{plot_heat()}} function will create heatmaps visualizing the relative abundance of
+a taxonomic group of interest from a \code{data.frame}.
 }
 \examples{
 library(mirlyn)

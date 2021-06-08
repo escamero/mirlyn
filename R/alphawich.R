@@ -1,11 +1,15 @@
 #' Alpha Diversity Dataframe
 #'
-#' alphadivDF() will generate a dataframe of alpha-diversity values from the mirl object allowing for characterization of uncertainty and variation introduced through random subsampling during rarefying.
+#' [alphadivDF()] will generate a dataframe of alpha-diversity values from the `mirl` object
+#' allowing for characterization of uncertainty and variation introduced through random
+#' subsampling during rarefying.
 #'
-#' @param x The mirl object.
-#' @param diversity Diversity index to be applied. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.
+#' @param x The `mirl` object.
+#' @param diversity Diversity index to be applied. By default, the Shannon Index will
+#'   be utilized in the generation of the dataframe. Diversity indexes available in vegan
+#'   are supported.
 #'
-#' @return A dataframe consisting of sample metadata and selected diversity indexes.
+#' @return A `data.frame` consisting of sample metadata and selected diversity indexes.
 #'
 #' @examples
 #' library(mirlyn)
@@ -26,14 +30,15 @@ alphadivDF <- function(x, diversity="shannon"){
 
 #' Visualization of Alpha Diversity Indexes
 #'
-#' alphawichVis() will visualize the diversity index values generated from alphadivDF().
+#' [alphawichVis()] will visualize the diversity index values generated from [alphadivDF()].
 #'
-#' @param alphawichDF The alphawichDF object.
-#' @param yvar The yvar column name. By default, the diversity index value will be plotted.
-#' @param xvar The xvar column name. Users must specify the metadata column to be plotted on the x-axis.
+#' @param alphawichDF The `alphawichDF` object.
+#' @param yvar The `yvar` column name. By default, the diversity index value will be plotted.
+#' @param xvar The `xvar` column name. Users must specify the metadata column to be plotted
+#'   on the x-axis.
 #' @param colorvar The metadata column name that will be used for colour assignment.
 #'
-#' @return A ggplot object.
+#' @return A `ggplot` object.
 #'
 #' @examples
 #' # This is one way of using it.
@@ -43,7 +48,7 @@ alphadivDF <- function(x, diversity="shannon"){
 #' \dontrun{
 #' example <- mirl(example, rep = 100)
 #' example <- alphadivDF(example)
-#' alphawichVis(example, "Sample")
+#' alphawichVis(example, "Id")
 #' }
 #'
 #' @export

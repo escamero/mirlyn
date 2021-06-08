@@ -7,17 +7,20 @@
 betamatPCA(x, transformation = "hellinger", dsim = "bray")
 }
 \arguments{
-\item{x}{The mirl() object.}
+\item{x}{The \code{\link[=mirl]{mirl()}} object.}
 
-\item{transformation}{Supported standardization methods in community ecology in decostand() from library(vegan). Hellinger transformations must be applied to ecological data in order to allow for application in Euclidean space.}
+\item{transformation}{Supported standardization methods in community ecology in
+\code{\link[vegan:decostand]{vegan::decostand()}}. Hellinger transformations must be applied to ecological data
+in order to allow for application in Euclidean space.}
 
-\item{dsim}{The dissimilarity metric supported by vegdist() from library(vegan). By default, the Bray-Curtis dissimilarity matrix will be applied.}
+\item{dsim}{The dissimilarity metric supported by \code{\link[vegan:vegdist]{vegan::vegdist()}}. By default,
+the Bray-Curtis dissimilarity matrix will be applied.}
 }
 \value{
-A prcomp object
+A \code{prcomp} object.
 }
 \description{
-betamatPCA() will perform a PCA on the mirl() object.
+\code{\link[=betamatPCA]{betamatPCA()}} will perform a PCA on the \code{\link[=mirl]{mirl()}} object.
 }
 \examples{
 library(mirlyn)

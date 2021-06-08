@@ -14,23 +14,27 @@ rarefy_whole_rep(
 )
 }
 \arguments{
-\item{x}{The phyloseq object.}
+\item{x}{The \code{phyloseq} object.}
 
-\item{rep}{The number of replicates to be performed. More replicates will take longer to conduct but will provide a smoother distribution for analyses.}
+\item{rep}{The number of replicates to be performed. More replicates will take
+longer to conduct but will provide a smoother distribution for analyses.}
 
 \item{steps}{The steps in library sizes to rarefy to.}
 
 \item{set.seed}{The seed value for reproducibility.}
 
-\item{mc.cores}{From \code{\link[parallel:mcdummies]{parallel::mclapply()}}.}
+\item{mc.cores}{From \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
 
 \item{intercept}{Create data points at (0,0).}
 }
 \value{
-A dataframe containing the observed sequence counts for samples of varying rarefied library sizes.
+A \code{data.frame} containing the observed sequence counts for samples of
+varying rarefied library sizes.
 }
 \description{
-rarefy_whole_rep() will rarefy each sample for different library sizes repeatedly in order to generate a representative set of data to be used in rarecurve() for generating rarefaction curves.
+\code{\link[=rarefy_whole_rep]{rarefy_whole_rep()}} will rarefy each sample for different library sizes repeatedly in
+order to generate a representative set of data to be used in \code{\link[=rarecurve]{rarecurve()}} for generating
+rarefaction curves.
 }
 \examples{
 library(mirlyn)

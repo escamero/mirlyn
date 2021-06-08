@@ -18,16 +18,18 @@ raw_tax <- function(x, taxrank = "Genus"){
 
 #' Taxonomic Composition Stacked Barcharts
 #'
-#' The bartax() function will create taxonomic composition barcharts. If desired, low-abundant taxonomic groups will be clustered into a single low abundant group.
+#' The [bartax()] function will create taxonomic composition barcharts. If desired,
+#'low-abundant taxonomic groups will be clustered into a single low abundant group.
 #'
-#' @param x is a phyloseq object.
+#' @param x is a `phyloseq` object.
 #' @param lowabun is the cut off value for a low-abundant group. Set to `NULL` to not use.
 #' @param xvar is a categorical variable selected from the metadata.
 #' @param yvar is the relative abundance of reads.
 #' @param taxrank is the specified taxonomic rank.
-#' @param cols is a vector containing specified colour values (sufficient number for number of taxonomic groups).
+#' @param cols is a vector containing specified colour values (sufficient number for
+#'   number of taxonomic groups).
 #'
-#' @return a ggplot object.
+#' @return A `ggplot` object.
 #'
 #' @examples
 #' library(mirlyn)
@@ -43,7 +45,10 @@ bartax <- function(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", taxra
   }else{
     x <- raw_tax(x, taxrank = taxrank)
   }
-  taxbar<- ggplot(x, aes_string(x=xvar, y=yvar, fill=taxrank))+geom_bar(stat="identity")+theme_bw()+scale_y_continuous(labels=function(x) paste0(x*100,"%"),limits=c(0,1.05),expand=c(0,0))
+  taxbar <- ggplot(x, aes_string(x=xvar, y=yvar, fill=taxrank)) +
+    geom_bar(stat="identity") +
+    theme_bw() +
+    scale_y_continuous(labels=function(x) paste0(x*100,"%"),limits=c(0,1.05),expand=c(0,0))
   if(!is.null(cols)){
     taxbar <- taxbar + scale_fill_manual(values = cols)
   }
@@ -52,12 +57,17 @@ bartax <- function(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", taxra
 
 #' Taxonomic Composition Stacked Barcharts - 7 levels
 #'
-#' The fullbartax() function will create taxonomic composition for barcharts for all 7 taxonomic levels.
-#' @param x is a phyloseq object.
+#' The [fullbartax()] function will create taxonomic composition for barcharts for all
+#' 7 taxonomic levels.
+#' 
+#' @param x is a `phyloseq` object.
 #' @param lowabun is the cut off value for a low-abundant group.
 #' @param xvar is a categorical variable selected from the metadata.
 #' @param yvar is the relative abundance of reads.
-#' @param cols is a vector containing specified colour values (sufficient number for number of taxonomic groups found at all levels).
+#' @param cols is a vector containing specified colour values (sufficient number for
+#'   number of taxonomic groups found at all levels).
+#'
+#' @return A `list` of `ggplot` objects.
 #'
 #' @examples
 #' \dontrun{

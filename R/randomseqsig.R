@@ -69,15 +69,17 @@ zscorestat <- function(stats) {
 
 #' Compositional Significance Testing
 #'
-#' The `randomseqsig()` function will identify whether a taxonomic group of interest is significantly over-represented or underrepresented in the community. 
+#' The [randomseqsig()] function will identify whether a taxonomic group of interest
+#' is significantly over-represented or underrepresented in the community. 
 #'
 #' @param x is a `phyloseq` object.
 #' @param taxlevel is the taxonomic level of the group of interest.
 #' @param group is the name of the taxonomic group of interest. 
 #' @param nshuff is the number of times data shuffling is performed. 
 #'
-#' @return a list object which contatins: 1) `objshuff`: The shuffled sequence variant counts. 2) `stats`: The mean, standard deviation, real counts and 
-#' p-values of the shuffled data.
+#' @return A `list` object which contatins: 1) `objshuff`: The shuffled sequence
+#'   variant counts. 2) `stats`: The mean, standard deviation, real counts and 
+#'   p-values of the shuffled data.
 #'
 #' @examples
 #' library(mirlyn)

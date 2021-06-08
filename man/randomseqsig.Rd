@@ -16,11 +16,13 @@ randomseqsig(x, taxlevel = "Phylum", group = "Cyanobacteria", nshuff = 1000)
 \item{nshuff}{is the number of times data shuffling is performed.}
 }
 \value{
-a list object which contatins: 1) \code{objshuff}: The shuffled sequence variant counts. 2) \code{stats}: The mean, standard deviation, real counts and
+A \code{list} object which contatins: 1) \code{objshuff}: The shuffled sequence
+variant counts. 2) \code{stats}: The mean, standard deviation, real counts and
 p-values of the shuffled data.
 }
 \description{
-The \code{randomseqsig()} function will identify whether a taxonomic group of interest is significantly over-represented or underrepresented in the community.
+The \code{\link[=randomseqsig]{randomseqsig()}} function will identify whether a taxonomic group of interest
+is significantly over-represented or underrepresented in the community.
 }
 \examples{
 library(mirlyn)

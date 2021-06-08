@@ -2,24 +2,24 @@
 % Please edit documentation in R/alphacone.R
 \name{alphaconeVis}
 \alias{alphaconeVis}
-\title{Alpha Diversity Metric Distributions Visualization
-alphaconeVis() will generate a visualization of the the distributions of the alpha diversity metric dataframe generated using alphacone()}
+\title{Alpha Diversity Metric Distributions Visualization}
 \usage{
 alphaconeVis(x, cols = "Sample", alpha = 0.7)
 }
 \arguments{
-\item{x}{The alphacone() dataframe}
+\item{x}{The \code{\link[=alphacone]{alphacone()}} dataframe}
 
 \item{cols}{The metadata column that will be used for colour assignment}
 
-\item{alpha}{The opacity of the geom_ribbon. By default, a value of 0.7 will be applied. For full opacity, set alpha = 1, for more transparency, decrease alpha accordingly.}
+\item{alpha}{The opacity of the geom_ribbon. By default, a value of 0.7 will be applied.
+For full opacity, set alpha = 1, for more transparency, decrease alpha accordingly.}
 }
 \value{
-a ggplot object.
+a \code{ggplot} object.
 }
 \description{
-Alpha Diversity Metric Distributions Visualization
-alphaconeVis() will generate a visualization of the the distributions of the alpha diversity metric dataframe generated using alphacone()
+\code{\link[=alphaconeVis]{alphaconeVis()}} will generate a visualization of the the distributions of the alpha
+diversity metric \code{data.frame} generated using \code{\link[=alphacone]{alphacone()}}.
 }
 \examples{
 library(mirlyn)
@@ -27,10 +27,7 @@ data(example)
 
 \dontrun{
 alphacone_example <- alphacone(example, rep = 100)
-}
-
-\dontrun{
-alphaconevis(alphacone_example, cols = "Sample")
+alphaconeVis(alphacone_example, cols = "Sample")
 }
 
 }

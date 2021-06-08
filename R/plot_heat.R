@@ -1,15 +1,17 @@
 #' Heatmaps for Taxonomic Group of Interest
 #'
-#' The `plot_heat()` function will create heatmaps visualizing the relative abundance of a taxonomic group of interest from a dataframe.
+#' The [plot_heat()] function will create heatmaps visualizing the relative abundance of
+#' a taxonomic group of interest from a `data.frame`.
 #'
-#' @param x is a `phyloseqtodf` object.
-#' @param taxlevel is the taxonomic level of the taxa you're interested in. By default, it will look at the phylum level.
+#' @param x is a `data.frame` from [phyloseq_to_df()].
+#' @param taxlevel is the taxonomic level of the taxa you're interested in. By
+#'   default, it will look at the phylum level.
 #' @param taxaname is the taxonomic name of interest.
 #' @param xvar is a categorical variable selected from the metadata.
 #' @param yvar is a secondary categorical variable selected from the metadata.
 #' @param fillvar is the column name of the abundance.
 #'
-#' @return a `ggplot` object.
+#' @return A `ggplot` object.
 #'
 #' @examples
 #' library(mirlyn)
@@ -27,7 +29,11 @@
 #' @export
 plot_heat <- function(x, taxlevel,taxaname, xvar, yvar, fillvar){
   tax_x <- x %>% filter(taxlevel == taxaname)
-  heatmap <-ggplot(x, aes_string(xvar, yvar, fill= fillvar))+geom_tile()+theme_bw()+scale_y_discrete(expand = c(0,0))+scale_x_discrete(expand = c (0,0))
+  heatmap <- ggplot(x, aes_string(xvar, yvar, fill= fillvar)) +
+    geom_tile() +
+    theme_bw() +
+    scale_y_discrete(expand = c(0,0)) +
+    scale_x_discrete(expand = c(0,0))
   heatmap
 }
 

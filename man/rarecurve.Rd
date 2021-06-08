@@ -7,15 +7,18 @@
 rarecurve(x, sample = "Sample")
 }
 \arguments{
-\item{x}{The rarefy_whole_rep() object.}
+\item{x}{The \code{\link[=rarefy_whole_rep]{rarefy_whole_rep()}} object.}
 
-\item{sample}{The sample ID which will be used to assign colours to different samples. Leave blank if don't want colours.}
+\item{sample}{The sample ID which will be used to assign colours to different
+samples. Leave blank if don't want colours.}
 }
 \value{
-A ggplot object of the rarefaction curve showing the observed ASV count according to library size of each sample.
+A \code{ggplot} object of the rarefaction curve showing the observed ASV count
+according to library size of each sample.
 }
 \description{
-rarecurve() will generate a visualization of the rarefaction curve showing the associated library size.
+\code{\link[=rarecurve]{rarecurve()}} will generate a visualization of the rarefaction curve showing the
+associated library size.
 }
 \examples{
 library(mirlyn)

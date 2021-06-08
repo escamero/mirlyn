@@ -1,5 +1,3 @@
-
-
 rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
   libsize <- sample_sums(x)
   libsizes <- max(libsize) * steps
@@ -15,16 +13,20 @@ rarefy_whole <- function(x, steps = seq(from = 0.001, to = 1, by = 0.01)){
 
 #' Rarefy Entire Sample Set
 #'
-#' rarefy_whole_rep() will rarefy each sample for different library sizes repeatedly in order to generate a representative set of data to be used in rarecurve() for generating rarefaction curves.
+#' [rarefy_whole_rep()] will rarefy each sample for different library sizes repeatedly in
+#' order to generate a representative set of data to be used in [rarecurve()] for generating
+#' rarefaction curves.
 #'
-#' @param x The phyloseq object.
-#' @param rep The number of replicates to be performed. More replicates will take longer to conduct but will provide a smoother distribution for analyses.
+#' @param x The `phyloseq` object.
+#' @param rep The number of replicates to be performed. More replicates will take
+#'   longer to conduct but will provide a smoother distribution for analyses.
 #' @param steps The steps in library sizes to rarefy to.
 #' @param set.seed The seed value for reproducibility.
 #' @param mc.cores From [parallel::mclapply()].
 #' @param intercept Create data points at (0,0).
 #'
-#' @return A dataframe containing the observed sequence counts for samples of varying rarefied library sizes.
+#' @return A `data.frame` containing the observed sequence counts for samples of
+#'   varying rarefied library sizes.
 #'
 #' @examples
 #' library(mirlyn)
@@ -60,12 +62,15 @@ rarefy_whole_rep <- function(x, rep = 100, steps = seq(from = 0.001, to = 1, by 
 
 #' Rarefaction Curve
 #'
-#' rarecurve() will generate a visualization of the rarefaction curve showing the associated library size.
+#' [rarecurve()] will generate a visualization of the rarefaction curve showing the
+#' associated library size.
 #'
-#' @param x The rarefy_whole_rep() object.
-#' @param sample The sample ID which will be used to assign colours to different samples. Leave blank if don't want colours.
+#' @param x The [rarefy_whole_rep()] object.
+#' @param sample The sample ID which will be used to assign colours to different
+#'   samples. Leave blank if don't want colours.
 #'
-#' @return A ggplot object of the rarefaction curve showing the observed ASV count according to library size of each sample.
+#' @return A `ggplot` object of the rarefaction curve showing the observed ASV count
+#'   according to library size of each sample.
 #'
 #' @examples
 #' library(mirlyn)
@@ -83,7 +88,9 @@ rarecurve <- function(x, sample = "Sample"){
     }else{
     curve <- ggplot(x, aes_string(x = "LibSize", y = "ObsASVCount", colour = sample))
   }
-  curve + geom_line()+theme_bw()+scale_y_continuous(limits=c(0, max(x$ObsASVCount)*1.01))
+  curve + geom_line() +
+    theme_bw() +
+    scale_y_continuous(limits=c(0, max(x$ObsASVCount)*1.01))
 }
 
 

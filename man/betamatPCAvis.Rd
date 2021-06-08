@@ -7,21 +7,22 @@
 betamatPCAvis(x, geom = "point", groups, reps, colours)
 }
 \arguments{
-\item{x}{The betamatPCAvis object.}
+\item{x}{The \code{\link[=betamatPCA]{betamatPCA()}} \code{prcomp} object.}
 
 \item{geom}{The geom style to be aplied to the plot.}
 
 \item{groups}{A vector containing the metadata variable being explored.}
 
-\item{reps}{The number of replicates conducted in the initial mirl().}
+\item{reps}{The number of replicates conducted in the initial \code{\link[=mirl]{mirl()}}.}
 
 \item{colours}{A vector containing colour values.}
 }
 \value{
-A ggplot object.
+A \code{ggplot} object.
 }
 \description{
-betamatPCAvis() will produce a visualization from the prcomp object generated from betamatPCA_object.
+\code{\link[=betamatPCAvis]{betamatPCAvis()}} will produce a visualization from the \code{prcomp} object
+generated from \code{\link[=betamatPCA]{betamatPCA()}}.
 }
 \examples{
 library(mirlyn)
@@ -30,8 +31,9 @@ mirlexample <- mirl(example, rep = 10)
 betamatPCA_object <- betamatPCA(mirlexample)
 
 \dontrun{
-betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D","E","F"), reps = 10,
-   colours = c("#000000", "#E69F00", "#0072B2", "#009E73", "#F0E442", "#D55E00"))
+betamatPCAvis(betamatPCA_object, groups = c("A", "B", "C", "D", "E", "F"),
+   reps = 10, colours = c("#000000", "#E69F00", "#0072B2", "#009E73",
+     "#F0E442", "#D55E00"))
 }
 
 }

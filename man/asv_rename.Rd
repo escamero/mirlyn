@@ -7,7 +7,7 @@
 asv_rename(x, file = file.path(getwd(), "ASVids.tsv"))
 }
 \arguments{
-\item{x}{The phyloseq object.}
+\item{x}{The \code{phyloseq} object.}
 
 \item{file}{The path to the tsv generated file of sequence variant identifiers.}
 }
@@ -15,12 +15,15 @@ asv_rename(x, file = file.path(getwd(), "ASVids.tsv"))
 x the modified phyloseq object.
 }
 \description{
-The asv_rename function will assign unique ASV identifiers that are easy to each sequence variant and will write a tsv file to your working directory for a reference list of all ASV names.
+The asv_rename function will assign unique ASV identifiers that are easy to each sequence
+variant and will write a tsv file to your working directory for a reference list of all ASV names.
 }
 \examples{
 library(mirlyn)
 library(phyloseq)
 data(GlobalPatterns)
+\dontrun{
 asv_rename(GlobalPatterns)
+}
 
 }

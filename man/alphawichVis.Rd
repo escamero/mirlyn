@@ -12,19 +12,20 @@ alphawichVis(
 )
 }
 \arguments{
-\item{alphawichDF}{The alphawichDF object.}
+\item{alphawichDF}{The \code{alphawichDF} object.}
 
-\item{xvar}{The xvar column name. Users must specify the metadata column to be plotted on the x-axis.}
+\item{xvar}{The \code{xvar} column name. Users must specify the metadata column to be plotted
+on the x-axis.}
 
-\item{yvar}{The yvar column name. By default, the diversity index value will be plotted.}
+\item{yvar}{The \code{yvar} column name. By default, the diversity index value will be plotted.}
 
 \item{colorvar}{The metadata column name that will be used for colour assignment.}
 }
 \value{
-A ggplot object.
+A \code{ggplot} object.
 }
 \description{
-alphawichVis() will visualize the diversity index values generated from alphadivDF().
+\code{\link[=alphawichVis]{alphawichVis()}} will visualize the diversity index values generated from \code{\link[=alphadivDF]{alphadivDF()}}.
 }
 \examples{
 # This is one way of using it.
@@ -34,7 +35,7 @@ data(example)
 \dontrun{
 example <- mirl(example, rep = 100)
 example <- alphadivDF(example)
-alphawichVis(example, "Sample")
+alphawichVis(example, "Id")
 }
 
 }

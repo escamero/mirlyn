@@ -1,7 +1,9 @@
 #' Assign ASV identifiers to sequence variants
 #'
-#' The asv_rename function will assign unique ASV identifiers that are easy to each sequence variant and will write a tsv file to your working directory for a reference list of all ASV names.
-#' @param x The phyloseq object.
+#' The asv_rename function will assign unique ASV identifiers that are easy to each sequence 
+#' variant and will write a tsv file to your working directory for a reference list of all ASV names.
+#'
+#' @param x The `phyloseq` object.
 #' @param file The path to the tsv generated file of sequence variant identifiers.
 #'
 #' @return x the modified phyloseq object.
@@ -10,7 +12,9 @@
 #' library(mirlyn)
 #' library(phyloseq)
 #' data(GlobalPatterns)
+#' \dontrun{
 #' asv_rename(GlobalPatterns)
+#' }
 #'
 #' @export
 asv_rename <- function(x, file = file.path(getwd(), "ASVids.tsv")){
@@ -26,7 +30,9 @@ asv_rename <- function(x, file = file.path(getwd(), "ASVids.tsv")){
 
 #' Assign ASV identifiers to FASTA
 #'
-#' The filt_fasta_rename function will assign corresponding ASV identifiers to a FASTA file for use in other applications.
+#' The filt_fasta_rename function will assign corresponding ASV identifiers to a
+#' FASTA file for use in other applications.
+#'
 #' @param fasta The FASTA file to assign ASV identifiers to.
 #' @param fixed The ASV reference list created by [asv_rename()].
 #'

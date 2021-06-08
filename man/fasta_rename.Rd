@@ -15,5 +15,6 @@ fasta_rename(fasta, fixed = file.path(getwd(), "ASVids.tsv"))
 \code{NULL}. The FASTA file is modified in place.
 }
 \description{
-The filt_fasta_rename function will assign corresponding ASV identifiers to a FASTA file for use in other applications.
+The filt_fasta_rename function will assign corresponding ASV identifiers to a
+FASTA file for use in other applications.
 }

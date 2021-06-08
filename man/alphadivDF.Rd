@@ -7,15 +7,19 @@
 alphadivDF(x, diversity = "shannon")
 }
 \arguments{
-\item{x}{The mirl object.}
+\item{x}{The \code{mirl} object.}
 
-\item{diversity}{Diversity index to be applied. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.}
+\item{diversity}{Diversity index to be applied. By default, the Shannon Index will
+be utilized in the generation of the dataframe. Diversity indexes available in vegan
+are supported.}
 }
 \value{
-A dataframe consisting of sample metadata and selected diversity indexes.
+A \code{data.frame} consisting of sample metadata and selected diversity indexes.
 }
 \description{
-alphadivDF() will generate a dataframe of alpha-diversity values from the mirl object allowing for characterization of uncertainty and variation introduced through random subsampling during rarefying.
+\code{\link[=alphadivDF]{alphadivDF()}} will generate a dataframe of alpha-diversity values from the \code{mirl} object
+allowing for characterization of uncertainty and variation introduced through random
+subsampling during rarefying.
 }
 \examples{
 library(mirlyn)

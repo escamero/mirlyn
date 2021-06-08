@@ -3,7 +3,7 @@
 \docType{data}
 \name{example}
 \alias{example}
-\title{An example phyloseq object.}
+\title{An example \code{phyloseq} object.}
 \format{
 A \link[phyloseq:phyloseq-class]{phyloseq::phyloseq} object.
 }
@@ -11,6 +11,6 @@ A \link[phyloseq:phyloseq-class]{phyloseq::phyloseq} object.
 example
 }
 \description{
-A phyloseq object with six samples.
+A \code{phyloseq} object with six samples.
 }
 \keyword{datasets}

@@ -7,7 +7,7 @@
 \description{
 The package desc.
 
-mirlyn is a package that allows for library size normalization for
+\code{mirlyn} is a package that allows for library size normalization for
 diversity analysis. This package also includes supplementary functions to
 generate taxonomic composition bar graphs and the assignment of ASV names to
 unique and easily referenced identities. The majority of the functions

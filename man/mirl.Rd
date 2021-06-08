@@ -10,27 +10,42 @@ mirl(
   rep = 1000,
   set.seed = NULL,
   trimOTUs = FALSE,
-  replace = FALSE
+  replace = FALSE,
+  mc.cores = 1L
 )
 }
 \arguments{
-\item{x}{The phyloseq object}
+\item{x}{The \code{phyloseq} object}
 
-\item{libsize}{The specified library size to rarefy to. By default, mirl() will rarefy to the minimum library size found in samples.}
+\item{libsize}{The specified library size to rarefy to. By default, \code{\link[=mirl]{mirl()}} will rarefy
+to the minimum library size found in samples.}
 
-\item{rep}{The number of times rarefying will be repeated. By default, mirl() will repeatedly rarefy 1000 times.}
+\item{rep}{The number of times rarefying will be repeated. By default, \code{\link[=mirl]{mirl()}} will
+repeatedly rarefy 1000 times.}
 
 \item{set.seed}{The seed value for reproducibility.}
 
-\item{trimOTUs}{A Boolean value determining whether OTUs that are absent from all samples after rarefying should be removed.}
+\item{trimOTUs}{A Boolean value determining whether OTUs that are absent from all
+samples after rarefying should be removed.}
 
-\item{replace}{A Boolean value determining whether subsampling should be performed with or without replacement. See Cameron et al., 2020 for further details.}
+\item{replace}{A Boolean value determining whether subsampling should be performed
+with or without replacement. See Cameron et al., 2020 for further details.}
+
+\item{mc.cores}{From \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
 }
 \value{
-A list of phyloseq objects.
+A list of \code{phyloseq} objects.
 }
 \description{
-mirl() will repeatedly rarefy to a user defined library size, for a specified number of replications to characterize the variation introduced through random subsampling. The implementation of mirl() allows for rarefying to be a statistically valid library size normalization technique for diversity analyses. Users are encouraged to conduct exploratory analysis to identify optimal rarefied library sizes for their data that minimizes variation in samples. Users may have to choose between rarefying to smaller than preferred library sizes or discarding small library size samples but the implementation of mirl() generally allows for rarefying to small library sizes at the loss of resolution and precision in results.
+\code{\link[=mirl]{mirl()}} will repeatedly rarefy to a user defined library size, for a specified number
+of replications to characterize the variation introduced through random subsampling.
+The implementation of mirl() allows for rarefying to be a statistically valid library
+size normalization technique for diversity analyses. Users are encouraged to conduct
+exploratory analysis to identify optimal rarefied library sizes for their data that
+minimizes variation in samples. Users may have to choose between rarefying to smaller
+than preferred library sizes or discarding small library size samples but the
+implementation of \code{\link[=mirl]{mirl()}} generally allows for rarefying to small library sizes at the
+loss of resolution and precision in results.
 }
 \examples{
 library(mirlyn)

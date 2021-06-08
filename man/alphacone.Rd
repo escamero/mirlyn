@@ -15,13 +15,14 @@ alphacone(
 )
 }
 \arguments{
-\item{x}{The phyloseq object.}
+\item{x}{The \code{phyloseq} object.}
 
 \item{rep}{The number of replications of rarefying to perform.}
 
 \item{steps}{The library sizes to rarefy to as a function of the library sizes of samples.}
 
-\item{diversity}{The diversity metric. By default, the Shannon Index will be utilized in the generation of the dataframe. Diversity indexes available in vegan are supported.}
+\item{diversity}{The diversity metric. By default, the Shannon Index will be utilized in
+the generation of the dataframe. Diversity indexes available in vegan are supported.}
 
 \item{lower.q}{The lower quantile for the distribution cone. By default it will provide the 2.5th.}
 
@@ -30,10 +31,15 @@ alphacone(
 \item{replace}{Whether to use replacement during sampling.}
 }
 \value{
-A dataframe of the distribution of the diversity metric.
+A \code{data.frame} of the distribution of the diversity metric.
 }
 \description{
-alphacone() will generate a dataframe of the alpha diversity metric for different library sizes. Different rarefied library sizes may have impact on both the measured value of the diversity metric and the perceived variation in the metric values. Generations of the distribution of the alpha diversity metric allows for a comprehensive examination of the alpha diversity metric values to account for variation introduced into the diversity metric as an artifact of rarefied library size.
+\code{\link[=alphacone]{alphacone()}} will generate a dataframe of the alpha diversity metric for different
+library sizes. Different rarefied library sizes may have impact on both the measured
+value of the diversity metric and the perceived variation in the metric values.
+Generations of the distribution of the alpha diversity metric allows for a comprehensive
+examination of the alpha diversity metric values to account for variation introduced into
+the diversity metric as an artifact of rarefied library size.
 }
 \examples{
 library(mirlyn)

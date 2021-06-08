@@ -2,7 +2,7 @@
 % Please edit documentation in R/phyloseqtodf.R
 \name{phyloseq_to_df}
 \alias{phyloseq_to_df}
-\title{Conversion of \code{phyloseq} Object to Dataframe}
+\title{Conversion of \code{phyloseq} Object to \code{data.frame}}
 \usage{
 phyloseq_to_df(x)
 }
@@ -10,7 +10,7 @@ phyloseq_to_df(x)
 \item{x}{The \code{phyloseq} object.}
 }
 \value{
-A dataframe object.
+A \code{data.frame} object.
 
 #' @examples
 library(mirlyn)
@@ -18,6 +18,7 @@ data(example)
 example_df <- phyloseq_to_df(example)
 }
 \description{
-\code{phyloseq_to_df()} will create a dataframe including OTU abundances, taxonomic classification and metadata extracted from the \code{phyloseq} object.
+\code{\link[=phyloseq_to_df]{phyloseq_to_df()}} will create a dataframe including OTU abundances, taxonomic
+classification and metadata extracted from the \code{phyloseq} object.
 This dataframe can be exported as a CSV file for easy viewing.
 }

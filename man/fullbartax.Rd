@@ -7,7 +7,7 @@
 fullbartax(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", cols = NULL)
 }
 \arguments{
-\item{x}{is a phyloseq object.}
+\item{x}{is a \code{phyloseq} object.}
 
 \item{xvar}{is a categorical variable selected from the metadata.}
 
@@ -15,10 +15,15 @@ fullbartax(x, xvar = "Sample", lowabun = 0.01, yvar = "Abundance", cols = NULL)
 
 \item{yvar}{is the relative abundance of reads.}
 
-\item{cols}{is a vector containing specified colour values (sufficient number for number of taxonomic groups found at all levels).}
+\item{cols}{is a vector containing specified colour values (sufficient number for
+number of taxonomic groups found at all levels).}
+}
+\value{
+A \code{list} of \code{ggplot} objects.
 }
 \description{
-The fullbartax() function will create taxonomic composition for barcharts for all 7 taxonomic levels.
+The \code{\link[=fullbartax]{fullbartax()}} function will create taxonomic composition for barcharts for all
+7 taxonomic levels.
 }
 \examples{
 \dontrun{

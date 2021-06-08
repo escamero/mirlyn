@@ -14,7 +14,7 @@ bartax(
 )
 }
 \arguments{
-\item{x}{is a phyloseq object.}
+\item{x}{is a \code{phyloseq} object.}
 
 \item{xvar}{is a categorical variable selected from the metadata.}
 
@@ -24,13 +24,15 @@ bartax(
 
 \item{taxrank}{is the specified taxonomic rank.}
 
-\item{cols}{is a vector containing specified colour values (sufficient number for number of taxonomic groups).}
+\item{cols}{is a vector containing specified colour values (sufficient number for
+number of taxonomic groups).}
 }
 \value{
-a ggplot object.
+A \code{ggplot} object.
 }
 \description{
-The bartax() function will create taxonomic composition barcharts. If desired, low-abundant taxonomic groups will be clustered into a single low abundant group.
+The \code{\link[=bartax]{bartax()}} function will create taxonomic composition barcharts. If desired,
+low-abundant taxonomic groups will be clustered into a single low abundant group.
 }
 \examples{
 library(mirlyn)

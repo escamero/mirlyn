@@ -20,37 +20,49 @@ get_asv_table(
 )
 }
 \arguments{
-\item{x}{The \code{phyloseqtodf} object}
+\item{x}{The object from \code{\link[=phyloseq_to_df]{phyloseq_to_df()}}.}
 
 \item{OTU}{The ASV column name. By default, the OTU column name is "OTU".}
 
-\item{Sample}{The Sample ID column name. By default, the Sample ID column  name is "sample" from the \code{phyloseqtodf()} function.}
+\item{Sample}{The Sample ID column name. By default, the Sample ID column name is
+"sample" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Abundance}{The Abundance column name. By default, the Sample ID column  name is "abundance" from the \code{phyloseqtodf()} function.}
+\item{Abundance}{The Abundance column name. By default, the Sample ID column name
+is "abundance" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Kingdom}{The taxonomic Kingdom column name. By default, the taxonomic Kingdom column name is "Kingdom" from the \code{phyloseqtodf()} function.}
+\item{Kingdom}{The taxonomic Kingdom column name. By default, the taxonomic Kingdom
+column name is "Kingdom" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Phylum}{The taxonomic Phylum column name. By default, the taxonomic Phylum column name is "Classified.Phylum" from the \code{phyloseqtodf()} function.}
+\item{Phylum}{The taxonomic Phylum column name. By default, the taxonomic Phylum column
+name is "Classified.Phylum" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Class}{The taxonomic Class column name. By default, the taxonomic Class column name is "Classified.Class" from the \code{phyloseqtodf()} function.}
+\item{Class}{The taxonomic Class column name. By default, the taxonomic Class column
+name is "Classified.Class" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Order}{The taxonomic Order column name. By default, the taxonomic Order column name is "Classified.Order" from the \code{phyloseqtodf()} function.}
+\item{Order}{The taxonomic Order column name. By default, the taxonomic Order column
+name is "Classified.Order" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Family}{The taxonomic Family column name. By default, the taxonomic Family column name is "Classified.Family" from the \code{phyloseqtodf()} function.}
+\item{Family}{The taxonomic Family column name. By default, the taxonomic Family column
+name is "Classified.Family" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Genus}{The taxonomic Genus column name. By default, the taxonomic Genus column name is "Genus" from the \code{phyloseqtodf()} function.}
+\item{Genus}{The taxonomic Genus column name. By default, the taxonomic Genus
+column name is "Genus" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{Species}{The taxonomic Species column name. By default, the taxonomic Species column name is "Classified.Species" from the \code{phyloseqtodf()} function.}
+\item{Species}{The taxonomic Species column name. By default, the taxonomic Species
+column name is "Classified.Species" from the \code{\link[=phyloseq_to_df]{phyloseq_to_df()}} function.}
 
-\item{proportion}{A Boolean value determining whether abundances of ASV should be expressed as raw read counts or \% abundance of the library. By default,
+\item{proportion}{A Boolean value determining whether abundances of ASV should be
+expressed as raw read counts or \% abundance of the library. By default,
 the \% abundance will be applied.}
 }
 \value{
 A dataframe.
 }
 \description{
-\code{get_asv_table()} will produce a compiled ASV table with abundance and taxonomic classifications using the output from \code{phyloseqtodf()}.
-In combination with the \code{filter()} function from \code{dplyr}, users may select a specific taxonomic group.
+\code{\link[=get_asv_table]{get_asv_table()}} will produce a compiled ASV table with abundance and taxonomic
+classifications using the output from \code{\link[=phyloseq_to_df]{phyloseq_to_df()}}.
+In combination with the \code{\link[dplyr:filter]{dplyr::filter()}} function, users may select a
+specific taxonomic group.
 }
 \examples{
 library(mirlyn)

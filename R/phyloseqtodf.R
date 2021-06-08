@@ -21,15 +21,16 @@ getotutax <- function(x){
   otutaxtable
 }
 
-#' Conversion of `phyloseq` Object to Dataframe
+#' Conversion of `phyloseq` Object to `data.frame`
 #'
-#' `phyloseq_to_df()` will create a dataframe including OTU abundances, taxonomic classification and metadata extracted from the `phyloseq` object. 
+#' [phyloseq_to_df()] will create a dataframe including OTU abundances, taxonomic
+#' classification and metadata extracted from the `phyloseq` object. 
 #' This dataframe can be exported as a CSV file for easy viewing. 
 #'
 #'
 #' @param x The `phyloseq` object.
 #'
-#' @return A dataframe object.
+#' @return A `data.frame` object.
 #' 
 #' #' @examples
 #' library(mirlyn)
