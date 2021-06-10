@@ -11,7 +11,9 @@ alphacone(
   diversity = "shannon",
   lower.q = 0.025,
   upper.q = 0.975,
-  replace = FALSE
+  replace = FALSE,
+  set.seed = NULL,
+  mc.cores = 1L
 )
 }
 \arguments{
@@ -29,6 +31,10 @@ the generation of the dataframe. Diversity indexes available in vegan are suppor
 \item{upper.q}{The upper quantile for the distribution cone. By default, the 97.5th will be applied.}
 
 \item{replace}{Whether to use replacement during sampling.}
+
+\item{set.seed}{The seed value for reproducibility.}
+
+\item{mc.cores}{From \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
 }
 \value{
 A \code{data.frame} of the distribution of the diversity metric.

@@ -1,3 +1,9 @@
+# mirlyn 1.3.0
+
+* Speed ups to `alphadivDF()` and `betamatPCA()`
+
+* Added set.seed and mc.cores options to `alphacone()`
+
 # mirlyn 1.2.2
 
 * Fixed another typo in README

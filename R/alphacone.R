@@ -23,12 +23,12 @@ repotu_df <- function(x) {
     newdat2[[i]]$SeqId <- rownames(newdat2[[i]])
     rownames(newdat2[[i]]) <- NULL
   }
-  finaldat <- newdat2[[1]]
-  for (i in seq_along(newdat2)[-1]) {
-    finaldat <- merge(finaldat, newdat2[[i]], by = "SeqId", all = FALSE)
-  }
+
+  finaldat <- Reduce(function(x1, x2) dplyr::inner_join(x1, x2, by = "SeqId"), newdat2)
+
   rownames(finaldat) <- finaldat$SeqId
-  finaldat[, -1]
+  finaldat[, colnames(finaldat) != "SeqId"]
+
 }
 
 #Replicate OTU Table to Dataframe - Multiple Library Sizes
@@ -68,6 +68,8 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #' @param lower.q The lower quantile for the distribution cone. By default it will provide the 2.5th.
 #' @param upper.q The upper quantile for the distribution cone. By default, the 97.5th will be applied.
 #' @param replace Whether to use replacement during sampling.
+#' @param set.seed The seed value for reproducibility.
+#' @param mc.cores From [parallel::mclapply()].
 #'
 #' @return A `data.frame` of the distribution of the diversity metric.
 #'
@@ -82,28 +84,30 @@ div_quantile_df <- function(x, diversity = "shannon", quantiles = c(0.025, 0.975
 #'
 #' @export
 alphacone <- function(x, rep = 1000, steps = seq(from = 0.001, to = 1, by = 0.01),
-  diversity = "shannon", lower.q = 0.025, upper.q = 0.975, replace = FALSE) {
+  diversity = "shannon", lower.q = 0.025, upper.q = 0.975, replace = FALSE, set.seed=NULL, mc.cores=1L) {
   libsizes <- max(sample_sums(x)) * steps
   samplenames <- sample_names(x)
   meta <- sample_data(x)
-  bylibsize <- vector("list", length(libsizes))
-  for (i in seq_along(bylibsize)) {
-    bylibsize[[i]] <- lapply(seq_len(rep),
-      function(y) suppressMessages(rarefy_even_depth(x, libsizes[i], verbose = FALSE, replace = replace)))
-  }
-  for (i in seq_along(bylibsize)) {
-    for (j in seq_along(bylibsize[[i]])) {
-      otutable <- t(otu_table(bylibsize[[i]][[j]]))
+  if (!is.null(set.seed)) set.seed(set.seed)
+  set.seed <- sample.int(1e9, length(libsizes))
+  bylibsize <- mclapply(seq_along(libsizes), function(y) {
+    set.seed(set.seed[y])
+    out <- lapply(seq_len(rep), function(z) {
+      suppressMessages(rarefy_even_depth(x, libsizes[y], verbose = FALSE, replace = replace))
+    })
+    for (j in seq_along(out)) {
+      otutable <- t(otu_table(out[[j]]))
       if (nrow(otutable) == 1) {
         otutable <- as.data.frame(otutable)
         tmpnames <- rownames(otutable)
       }
-      bylibsize[[i]][[j]] <- diversity(otutable, index = diversity)
+      out[[j]] <- diversity(otutable, index = diversity)
       if (nrow(otutable) == 1) {
-        names(bylibsize[[i]][[j]]) <- tmpnames
+        names(out[[j]]) <- tmpnames
       }
     }
-  }
+    out
+  }, mc.cores = mc.cores)
   for (i in seq_along(bylibsize)) {
     for (j in seq_along(bylibsize[[i]])) {
       bylibsize[[i]][[j]] <- data.frame(

@@ -37,12 +37,10 @@
 #'
 #' @export
 mirl <- function(x, libsize=min(phyloseq::sample_sums(x)), rep=1000, set.seed=NULL, trimOTUs=FALSE, replace=FALSE, mc.cores = 1L){
-  if (is.null(set.seed)) {
-    set.seed <- rep(FALSE, rep)
-  } else {
-    set.seed(set.seed)
-    set.seed <- sample.int(rep)
-  }
+  if (!phyloseq::taxa_are_rows(x))
+    stop("The mirlyn package requires phylsoseq::taxa_are_rows(x) to be TRUE.")
+  if (!is.null(set.seed)) set.seed(set.seed)
+  set.seed <- sample.int(1e9, rep)
   mclapply(seq_len(rep),
     function(y) suppressMessages(rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs,
         replace = replace, verbose = FALSE, rngseed = set.seed[y])),
