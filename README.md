@@ -1,4 +1,4 @@
-# Update: new version coming in June 2021
+# Update: Version 1.3.0 Now Available
 
 # Multiple Iterations of Rarefying for Library Normalization (mirlyn)
 
@@ -45,15 +45,22 @@ mirlyn includes a suite of functions focusing on the application of multiple ite
 - `alphacone()` - Generates a visualization of the distribution of diversity index for all different library sizes. 
 - `betamatPCA()` - Generates a PCA for `mirl()` output.
 - `betamatPCAvis()` - Generates a visualization for PCA output.
+- `phyloseqtodf()` - Generations a dataframe from a `phyloseq` object including taxonomy, ASV read counts and supporting metadata. 
+- `get_asv_table()` - Generates a compiled ASV table with counts and taxonomic classification of individual amplicon sequence variants. 
+- `randomseqsig()` - Identification of whether a taxonomic group of interest is significantly dominant or rare in the community using data shuffling. 
+- `plot_heat()` - Generates heat maps visualizing the relative abundance of taxonomic group of interest from a dataframe.
 
 To view help page for any of the functions type the function name preceded by a question mark. For example: `?mirl`
 
-## Example Workflow
+## Example R Workflow
 
+## a) Data Import
+`QIIME2R` was used to import .qza files into R as a `phylsoeq` objects. This generated phyloseq object was then used for community diversity analyses using `mirlyn`, an R package developed in Chapter 2 including various functions for library normalization and diversity analyses. `mirlyn` funcitons frequently relies on the usage of a `phyloseq` object and various methods can be used for generating this object in R. 
+
+## b) Data Handling
 ### 1. Assigning ASV Identifiers to Sequence Variants
 
-Prior to conducting analysis of sequencing data, users may choose to assign unique and easily referenced identifiers to their data. 
-
+During the creation of the ASV table in QIIME2, each unique sequence is assigned an identifier consisting of a string of characters (e.g., 88b44c11059bcf2950ca0ac50f3eb08f). To improve readability, the asv_rename() function codes these character string identifiers to a new identifier in the form “ASV###”. While this step is not mandatory, it allows for easy reference to specific ASV. 
 ```r
 library(mirlyn)
 library(phyloseq)
@@ -67,23 +74,37 @@ asv_rename(GlobalPatterns)
 
 After unique and easily referenced ASV identifiers are assigned to sequencing data, users can cross-reference the original sequence variant identifiers in the FASTA file to the new identifiers using the fasta_rename function.
 
-
-### 2. Taxonomic Composition Bar Charts
-
-Prior to conducting diversity analysis, users may choose to generate relative abundance taxonomic composition bar charts. While this is not the focus of mirlyn, visualizations are supported. Users may choose to generate compositional bar charts for one taxonomic level or may generate graphs for all taxonomic levels. Since taxonomic bar charts utilize relative abundance, no rarefaction is required. Users may choose to specify the colours to use which must be equal to the number of taxonomic groups included in the generated graph. If users choose to generate all taxonomic graphs at once, graphs will be generated in a list object. 
+### 2. Generation of Data Frame from `phyloseq` Object
+Data is initially imported into R as a `phyloseq` object. The `phyloseq` object is critical for subsequently performing diversity analysis. However, for plotting options or subsequent export as a CSV file, the `phyloseq_to_df()` function will convert the phyloseq object to a data frame containing the ASV counts, taxonomic classification and metadata.  
 
 ```r
-# Generating taxonomic bar graph for Phylum taxonomic rank.
-library(mirlyn)
+# Generate dataframe from phyloseq object
+example_df <- phyloseq_to_df(example)
+```
 
-# Load example data from mirlyn.
-data(example)
+### 3. Generation of Compiled ASV Table
+The data frame generated using `phyloseq_to_df()` can be further organized to focus on the read counts of each ASV across the different samples. The `get_asv_table()` also includes the taxonomic classification of the ASV but does not include sample metadata. 
 
-# Example colour vector. Depending on the number of entries in graph, total colour number needs to be adjusted. 
+```r
+# Generate compiled ASV table from phyloseq dataframe
+example_df_asv <- get_asv_table(example_df)
+```
+
+## c) Taxonomic Composition
+### 1. Visualization
+
+`mirlyn` provides two visualization options for taxonomic communities including stacked bar plots and heatmaps. Heatmaps are optimal to use when interested in exploring the trends in relative abundances of one taxonomic group (e.g., Cyanobacteria). Alternatively, the stacked bar charts can be used to identify overall composition of communities. 
+
+```r
+# Stacked Barcharts at the Phylum Rank
 cols <- c("black", "darkgoldenrod1", "dodgerblue", "deeppink4", "chartreuse3", "burlywood4", "navy", "blueviolet", "tan2", "lavenderblush3", "cyan4")
 
-# Generates taxonomic barchart for individual taxonomic rank with specified colours (if included).
-bartax(example, "Sample", taxrank = "Phylum", cols = cols)
+example_barchart <- bartax(example, “Sample”, taxrank = “Phylum”, cols = cols) 
+
+# Heatmap of Cyanobacterial Abundances in the Bacterial Community
+example_df_phylum <- example_df %>% group_by(Sample, Id, Phylum) %>% summarise(abaundance = (sum(abundance)) %>% mutate(Proportion = abundance/sum(abundance)*100)
+
+plot_heat(example_df_phylum, taxlevel = “Phylum”, taxaname = “Cyanobacteria”, xvar = “sample”, yvar = “Id”, fillvar = “Proportion”)+scae_fill_gradient(low = “white”, high = “midnightblue”)
 ```
 
 ```r
@@ -103,24 +124,28 @@ names(alltaxgraphs)
 alltaxgraphs$Class
 ```
 
-### 3. Generate Rarefaction Curve to Determine Appropriate Rarefied Library Size
-
-Prior to rarefying, a rarefaction curve can be generated to provide users with an overview of the observed sequence variants in samples corresponding to different rarefied library sizes. Theoretically, samples that have a plateau in the rarefaction curve have maximal observed diversity. Rarefaction curves should be used in rarefied library size selection to ensure that the user-selected library size encompasses maximal diversity while being inclusive of all samples where possible. To generate the rarefaction curves for a sample set, users must first rarefy the entire sample set followed by generation of the rarefaction curve. 
-
+### 2. Compositional Significance Testing
+Amplicon sequencing data is inherently compositional (Gloor et al., 2016). The composition of these communities is reported in relative abundance but raises the question of when is a group statistically abundant within the community. The `randomseqsig()` function will identify whether a taxonomic group of interest is significantly dominant in the community. This can be used to identify conditions where a taxonomic group of interest (e.g., Cyanobacteria) are in significantly higher abundances. 
 ```r
-library(mirlyn)
-
-# Load example data from mirlyn.
-data(example)
-
-# Rarefy entire sample set. 
-rarefy_whole_rep_ex <- rarefy_whole_rep(example, rep = 100)
-
-# Generate rarefaction curve.
-rarecurve_ex <- rarecurve(rarefy_whole_rep_ex, sample = "Sample")
+# Calculate significance of Phylum: Cyanobacteria
+compsig_example <- randomseqsig(example, taxlevel = "Phylum", group = "Cyanobacteria", nshuff = 1000)
 ```
 
-### 4. Multiple Iterations of Rarefying Libraries (mirl)
+## d) Diversity Analyses
+Prior to conducting diversity analysis, libraries must be normalized to account for variation in library sizes. A variety of techniques are available each with their own benefits and limitations and researchers are encouraged to evaluate the effectiveness of these techniques for their data. However, for this research, `mirlyn` utilizes repeated iterations of rarefying, the process of subsampling to a user specified library size.
+
+### 1. Library Normalization
+To identify appropriate library sizes to rarefy to, a rarefaction curve can be generated to provide an overview of the observed ASV in samples corresponding to different rarefied library sizes. Theoretically, samples that have a plateau in the curve have reached maximal observed diversity. This visualization should be used to select an appropriate library size which encompasses maximal diversity while being inclusive of samples. 
+
+```r
+# Creation of rarefaction curve data frame
+Rarefy_whole_rep_example <- rarefy_whole_rep(example, rep = 100)
+
+#Visualization of rarefaction curve
+Rarecurve_ex <- rarecurve(rarefy_whole_rep_ex, sample = “Sample”
+```
+
+### 2. Multiple Iterations of Rarefying Libraries (mirl)
 
 After generating rarefaction curves, users may select an appropriate rarefied library size for their analysis. Users should aim to select a library size that represents maximal diversity and is inclusive of all samples. In the case where users must make the decision between losing samples or drastically reducing the represented diversity, users may opt to conduct analyses at the lower library size inclusive of all samples at the loss of diversity in some samples in addition to a larger rarefied library size which results in exclusion of small library size samples. Depending on the data structure, users may choose to include a different number of repeated iterations. For example, if the repeated iterations do not result in highly variable outputs in the diversity analyses, the number of iterations may be reduced. However, if large variation is present, users should aim to include a larger number of iterations to allow for better characterization of variation introduced through random subsampling. The `mirl_object` will be used in the subsequent analyses. 
 
@@ -130,11 +155,11 @@ library(mirlyn)
 # Load example data from mirlyn.
 data(example)
 
-# Repeatedly rarefies to specified library size.
+# Repeatedly rarefies to specified library size n times
 mirl_object <- mirl(example, libsize = 10000, rep = 100, set.seed = 120)
 ```
 
-### 5. Alpha-Diversity
+### 3. Alpha-Diversity
 
 mirlyn contains two visualization options for alpha-diversity analyses. Both implement the use of a diversity metric (e.g., Shannon diversity index). The `alphadivDF()` function utilizes the `mirl_object` generated in the previous step and is only applicable to the diversity metric at the specified library size used with `mirl()`. The `alphacone()` function generates a distrubtion of the diversity metric across different rarefied library sizes providing users with a comprehensive view of the diversity metric as a function of rarefied library size. 
 
@@ -157,7 +182,7 @@ alphacone_example <- alphacone(example, rep = 100)
 alphaconeVis(alphacone_example, "Sample")
 ```
 
-### 6. Beta-Diversity
+### 4. Beta-Diversity
 
 Currently, mirlyn only supports the use of PCA for beta-diversity analyses. Future ordination techniques such as PCoA and NMDS may be implemented in future versions. A Hellinger transformation is recommended to apply to sequence count data prior to conducting PCA to account for the arch-effect regularly seen in ecological data. The beta-diversity functions utilize the `mirl_object` generated previously. 
 
