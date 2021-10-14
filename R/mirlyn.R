@@ -1,7 +1,6 @@
-#' mirlyn: A package for blah blah.
+#' mirlyn: A package for library size normalization using repeated iterations of rarefaction
 #'
 #' @description
-#' The package desc.
 #'
 #' `mirlyn` is a package that allows for library size normalization for
 #' diversity analysis. This package also includes supplementary functions to
