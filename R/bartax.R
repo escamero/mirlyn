@@ -5,7 +5,7 @@ lowabundance_tax <- function(x, taxrank = "Genus", lower_limit = 0.01) {
   x <- suppressMessages(phyloseq::tax_glom(x, taxrank = taxrank))
   x <- phyloseq::psmelt(x)
   x[[taxrank]] <- as.character(x[[taxrank]])
-  x[[taxrank]][x[["Abundance"]] < lower_limit] <- "<1% abundance"
+  x[[taxrank]][x[["Abundance"]] < lower_limit] <- paste0("<", lower_limit * 100,"% abundance")
   x
 }
 
