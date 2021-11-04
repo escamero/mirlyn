@@ -28,13 +28,11 @@
 #'
 #' @export
 plot_heat <- function(x, taxlevel,taxaname, xvar, yvar, fillvar){
-  tax_x <- x %>% filter(taxlevel == taxaname)
-  heatmap <- ggplot(x, aes_string(xvar, yvar, fill= fillvar)) +
+  tax_x<- x[x[[taxlevel]] == taxaname, ]
+  heatmap <- ggplot(tax_x, aes_string(xvar, yvar, fill= fillvar)) +
     geom_tile() +
     theme_bw() +
     scale_y_discrete(expand = c(0,0)) +
     scale_x_discrete(expand = c(0,0))
   heatmap
 }
-
-

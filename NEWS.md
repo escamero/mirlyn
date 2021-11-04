@@ -1,3 +1,7 @@
+# mirlyn 1.3.1
+
+* Fixed `plot_heat()` function
+
 # mirlyn 1.3.0
 
 * Speed ups to `alphadivDF()` and `betamatPCA()`

@@ -1,15 +1,15 @@
 Package: mirlyn
 Title: Multiple Iterations of Rarefying for Library Normalization
-Version: 1.3.0
-Authors@R: 
+Version: 1.3.1
+Authors@R:
     c(person(given = "Ellen S.",
            family = "Cameron",
            role = c("aut", "cre"),
-           email = "escamero@uwaterloo.ca"), 
-      person(given = "Benjamin Jean-Marie", 
-           family = "Tremblay", 
-           role = "aut", 
-           email = "benjamin.tremblay@uwaterloo.ca", 
+           email = "escamero@uwaterloo.ca"),
+      person(given = "Benjamin Jean-Marie",
+           family = "Tremblay",
+           role = "aut",
+           email = "benjamin.tremblay@uwaterloo.ca",
            comment = c(ORCID = "0000-0002-7441-2951")))
 Description: mirlyn is a package that allows for library size normalization for
   diversity analysis. This package also includes supplementary functions to
@@ -22,10 +22,10 @@ Description: mirlyn is a package that allows for library size normalization for
   sample comparison in diversity analysis without inherent bias. While a variety
   of library normalization techniques have been proposed in the literature,
   mirlyn repeatedly rarefies samples to characterize the sequence data lost in
-  the random subsampling process. The characterization of variation through 
+  the random subsampling process. The characterization of variation through
   rarefying allows for the creation of comprehensive computational replicates
   that provide stronger representation of the original biological communities
-  while also accounting for differences in library size. 
+  while also accounting for differences in library size.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -34,5 +34,5 @@ RoxygenNote: 7.1.1
 Depends: R (>= 3.5.0)
 Imports: phyloseq, ggplot2, vegan, stats, factoextra, methods, readr, microbiome,
   Biostrings, dplyr, parallel, reshape2, tidyr
-Suggests: 
+Suggests:
     testthat
