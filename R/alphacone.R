@@ -14,20 +14,19 @@ rarefy_lib_otu_rep <- function(x, libsizes, rep) {
 
 #Replicate OTU Table to Dataframe - Single Library Size
 repotu_df <- function(x) {
+
   newdat <- lapply(x, otu_table)
+
+  finaldat <- matrix(ncol = ncol(newdat[[1]]) * length(newdat), nrow = nrow(newdat[[1]]),
+    dimnames = list(rownames(newdat[[1]]),
+      paste0(rep(seq_len(length(newdat)), each = ncol(newdat[[1]])), "-",
+        rep(colnames(newdat[[1]]), times = length(newdat)))))
+
   for (i in seq_along(newdat)) {
-    colnames(newdat[[i]]) <- paste0(i, "-", colnames(newdat[[i]]))
-  }
-  newdat2 <- lapply(newdat, as.data.frame)
-  for (i in seq_along(newdat2)) {
-    newdat2[[i]]$SeqId <- rownames(newdat2[[i]])
-    rownames(newdat2[[i]]) <- NULL
+    finaldat[, (1 + (i - 1) * ncol(newdat[[1]])):(i * ncol(newdat[[1]]))] <- newdat[[i]]
   }
 
-  finaldat <- Reduce(function(x1, x2) dplyr::inner_join(x1, x2, by = "SeqId"), newdat2)
-
-  rownames(finaldat) <- finaldat$SeqId
-  finaldat[, colnames(finaldat) != "SeqId"]
+  finaldat
 
 }
 

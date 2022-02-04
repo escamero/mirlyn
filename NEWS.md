@@ -1,3 +1,7 @@
+# mirlyn 1.4.0
+
+* Significant speed increase for internal function `repotu_df()`, which should help functions which use rarefied objects with many samples and reps
+
 # mirlyn 1.3.1
 
 * Fixed `plot_heat()` function
