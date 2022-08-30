@@ -2,12 +2,12 @@ citHeader("To cite mirlyn in publications use:")
 
 citEntry(
   entry    = "Article",
-  title    = "To rarefy or not to rarefy: Enhancing microbial community analysis through next-generation sequencing",
+  title    = "Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities",
   author   = "Ellen S. Cameron and Philip J. Schmidt and Benjamin J.-M. Tremblay and Monica B. Emelko and Kirsten M. M\"uller",
-  journal  = "bioRxiv",
-  year     = "2020",
-  url      = "https://doi.org/10.1101/2020.09.09.290049",
+  journal  = "Scientific Reports",
+  year     = "2021",
+  url      = "https://doi.org/10.1038/s41598-021-01636-1",
   textVersion = paste(
-    "Cameron, E.S., Schmidt, P.J., Tremblay, B.J.-M., Emelko, M.B., Müller, K.M., 2020. To rarefy or not to rarefy: Enhancing microbial community analysis through next-generation sequencing. bioRxiv, https://doi.org/10.1101/2020.09.09.290049"
+    "Cameron, E.S., Schmidt, P.J., Tremblay, B.J.-M., Emelko, M.B., Müller, K.M., 2021. Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities. Scientific Reports, 11, https://doi.org/10.1038/s41598-021-01636-1"
   )
 )
