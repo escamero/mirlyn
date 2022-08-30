@@ -11,7 +11,7 @@ that can be implemented succesfully for diversity analyses when applied over mul
 A variety of normalization techniques have been proposed for amplicon sequencing data. It is strongly advised that you review literature resources to ensure that you make an educated decision about the normalization techniques you are applying to your data. 
 
 ### Suggested Resources
-Cameron, E.S., Schmidt, P.J., Tremblay, B.J.-M., Emelko, M.B., Müller, K.M., 2020. To rarefy or not to rarefy: Enhancing microbial community analysis through next-generation sequencing. bioRxiv, https://doi.org/10.1101/2020.09.09.290049
+Cameron, E.S., Schmidt, P.J., Tremblay, B.J.-M., Emelko, M.B., Müller, K.M., 2021. Enhancing diversity analysis by repeatedly rarefying next generation sequencing data describing microbial communities. Scientific Reports, 11, https://doi.org/10.1038/s41598-021-01636-1
 
 
 Gloor, G.B., Macklaim, J.M., Pawlowsky-Glahn, V., Egozcue, J.J., 2017. Microbiome datasets are compositional: And this is not optional. Front. Microbiol. 8, 1–6. https://doi.org/10.3389/fmicb.2017.02224
