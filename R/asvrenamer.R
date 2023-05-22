@@ -17,9 +17,9 @@
 #' }
 #'
 #' @export
-asv_rename <- function(x, file = file.path(getwd(), "ASVids.tsv")){
+asv_rename <- function(x, file = file.path(getwd(), "ASVids.tsv"), prefix = "ASV"){
   treefix <- phy_tree(x)$tip.label
-  fixed <- paste0("ASV", seq_along(treefix))
+  fixed <- paste0(prefix = prefix, seq_along(treefix))
   names(fixed) <- treefix
   asvdf <- data.frame(Variant = names(fixed), ASVid = fixed,
     stringsAsFactors = FALSE, row.names = NULL)
