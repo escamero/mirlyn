@@ -1,3 +1,11 @@
+# mirlyn 1.4.1
+
+* Custom prefix name in asvrenamer.R
+
+* Don't forget user distance/similarity metric in `betamatPCA()`
+
+* Warn about dropped samples in `mirl()`
+
 # mirlyn 1.4.0
 
 * Significant speed increase for internal function `repotu_df()`, which should help functions which use rarefied objects with many samples and reps

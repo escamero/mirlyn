@@ -41,8 +41,13 @@ mirl <- function(x, libsize=min(phyloseq::sample_sums(x)), rep=1000, set.seed=NU
     stop("The mirlyn package requires phylsoseq::taxa_are_rows(x) to be TRUE.")
   if (!is.null(set.seed)) set.seed(set.seed)
   set.seed <- sample.int(1e9, rep)
-  mclapply(seq_len(rep),
+  mirlobj <- mclapply(seq_len(rep),
     function(y) suppressMessages(rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs,
         replace = replace, verbose = FALSE, rngseed = set.seed[y])),
     mc.cores = mc.cores)
+  if (ncol(x) > ncol(mirlobj[[1]])) {
+    warning(ncol(x) - ncol(mirlobj[[1]]), " samples were dropped due to too ",
+      "few counts.")
+  }
+  mirlobj
 }

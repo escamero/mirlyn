@@ -22,7 +22,7 @@
 #' @export
 betamatPCA <- function(x, transformation="hellinger", dsim="bray"){
   if (is.null(transformation)){
-    dist <- vegdist(as.matrix(t(repotu_df(x))))
+    dist <- vegdist(as.matrix(t(repotu_df(x))), method=dsim)
   } else {
     transform <- decostand(as.matrix(t(repotu_df(x))), transformation)
     dist <- vegdist(transform, method=dsim)
