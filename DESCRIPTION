@@ -1,6 +1,6 @@
 Package: mirlyn
 Title: Multiple Iterations of Rarefying for Library Normalization
-Version: 1.4.1
+Version: 1.4.2
 Authors@R:
     c(person(given = "Ellen S.",
            family = "Cameron",

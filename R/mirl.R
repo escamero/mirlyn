@@ -45,8 +45,10 @@ mirl <- function(x, libsize=min(phyloseq::sample_sums(x)), rep=1000, set.seed=NU
     function(y) suppressMessages(rarefy_even_depth(x, sample.size=libsize, trimOTUs = trimOTUs,
         replace = replace, verbose = FALSE, rngseed = set.seed[y])),
     mc.cores = mc.cores)
-  if (ncol(x) > ncol(mirlobj[[1]])) {
-    warning(ncol(x) - ncol(mirlobj[[1]]), " samples were dropped due to too ",
+  l1 <- length(sample_names(x))
+  l2 <- length(sample_names(mirlobj[[1]]))
+  if (l1 > l2) {
+    warning(l1 - l2, " samples were dropped due to too ",
       "few counts.")
   }
   mirlobj

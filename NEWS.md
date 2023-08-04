@@ -1,3 +1,7 @@
+# mirlyn 1.4.2
+
+* Fix bug in `mirl()` introduced in v1.4.1
+
 # mirlyn 1.4.1
 
 * Custom prefix name in asvrenamer.R
