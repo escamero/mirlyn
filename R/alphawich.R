@@ -21,11 +21,31 @@
 #' }
 #'
 #' @export
-alphadivDF <- function(x, diversity="shannon"){
-  md <- sample_data(x[[1]])
-  div <- diversity(t(repotu_df(x)), index=diversity)
-  final <- suppressWarnings(cbind(md, DiversityIndex = div))
-  final
+alphadivDF <- function(x, diversity = c("shannon", "simpson", "invsimpson")) {
+    md <- sample_data(x[[1]])
+    
+    # Calculate observed richness
+    t_otu_table <- t(rep_otu_df(x))
+    observed <- specnumber(t_otu_table)
+    observed_richness_df <- rownames_to_column(as.data.frame(observed), var = "Unique_ID")
+    
+    div_df_list <- lapply(diversity, function(index) {
+        div_values <- vegan::diversity(t(rep_otu_df(x)), index = index)
+        if (!is.matrix(div_values)) {
+            div_values <- as.matrix(div_values, ncol = 1, dimnames = list(rownames(div_values), NULL))
+        }
+        colnames(div_values) <- paste0(index, "_", colnames(div_values))
+        return(data.frame(Unique_ID = rownames(div_values), div_values, stringsAsFactors = FALSE))
+    })
+    
+    final <- reduce(div_df_list, function(df1, df2) inner_join(df1, df2, by = "Unique_ID"))
+    
+    # Merge observed richness with the final dataframe
+    final <- merge(final, observed_richness_df, by = "Unique_ID", all.x = TRUE)
+    
+    final <- cbind(md, final)
+    
+    return(final)
 }
 
 #' Visualization of Alpha Diversity Indexes
